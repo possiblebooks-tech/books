@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essentials | Learn. Connect. Grow.</title>
+<style>
+:root{--bg:#07111f;--panel:#101c31;--panel2:#14233d;--text:#eef3ff;--muted:#9aa9c3;--purple:#7046e8;--green:#19b85b;--line:#263754}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#07111f,#0b1630);color:var(--text)}
+header{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 22px;gap:24px;position:sticky;top:0;background:#081321ee;backdrop-filter:blur(10px);z-index:5}
+.logo{font-size:28px;font-weight:800}.logo span{color:#8b6cff}.tag{font-size:12px;color:var(--muted)}
+.search{max-width:430px;flex:1;margin-left:30px}.search input,input,textarea{width:100%;background:#0b1729;border:1px solid var(--line);color:white;border-radius:10px;padding:13px;outline:none}
+nav{display:flex;gap:20px;color:#c9d3e6}.layout{display:grid;grid-template-columns:250px 1fr 340px;gap:18px;padding:18px;min-height:calc(100vh - 72px)}
+.card,.side{background:linear-gradient(180deg,var(--panel),#0d1829);border:1px solid var(--line);border-radius:16px}.side{padding:16px}.subjects h4{color:var(--muted);font-size:12px}.subject{padding:11px;border-radius:10px;color:#c9d3e6;cursor:pointer}.subject:hover,.subject.active{background:linear-gradient(90deg,#5632b5,#7247d8);color:white}
+main{min-width:0}.hero{padding:30px;min-height:240px;background:linear-gradient(120deg,#151c45,#0e2541);border:1px solid #26385e;border-radius:18px;position:relative;overflow:hidden}.hero h1{font-size:34px;margin:8px 0}.hero p{color:#b6c3dc;font-size:17px}.math{position:absolute;right:35px;top:35px;font-size:26px;color:#a88cff;opacity:.8}.btn{border:0;border-radius:10px;padding:13px 20px;color:white;font-weight:bold;cursor:pointer;background:#343f58}.primary{background:linear-gradient(90deg,#6135d2,#875df0)}.join{background:linear-gradient(90deg,#0fa84e,#24c96a);width:100%;font-size:18px;margin-top:12px}
+.section{margin-top:18px;padding:18px}.section h2{font-size:18px;margin:0 0 16px}.courses{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.course{background:#15233b;border:1px solid var(--line);border-radius:12px;padding:16px}.progress{height:6px;background:#091323;border-radius:8px;margin-top:15px;overflow:hidden}.progress b{display:block;height:100%;background:#25bd67;border-radius:8px}
+.comment-form{display:flex;gap:10px}.comment-form input{flex:1}.comments{margin-top:16px}.comment{padding:14px 0;border-top:1px solid #22324c}.comment strong{color:#fff}.comment small{color:var(--muted);margin-left:8px}.comment p{margin:7px 0;color:#cbd5e8}.right h3{margin-top:0}.online{display:flex;align-items:center;gap:10px;padding:9px 0}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#6746c9;font-weight:bold}.dot{width:8px;height:8px;border-radius:50%;background:#21c766;display:inline-block}
+.chat{height:300px;display:flex;flex-direction:column}.messages{flex:1;overflow:auto}.message{padding:8px 10px;margin:8px 0;background:#16233a;border-radius:10px;color:#dce5f6}.mine{background:#613dcc;margin-left:35px}.video-card{margin-top:18px;padding:18px}.status{color:var(--muted);font-size:14px}
+#previewModal,#matchModal{display:none;position:fixed;inset:0;background:#000a;z-index:20;place-items:center;padding:20px}.modal{width:min(650px,100%);background:#101c31;border:1px solid #34496e;border-radius:18px;padding:25px}.video{height:280px;background:#050b14;border-radius:12px;display:grid;place-items:center;font-size:18px;color:#9aa9c3;margin:15px 0}.close{float:right;background:none;border:0;color:white;font-size:25px;cursor:pointer}
+@media(max-width:1000px){.layout{grid-template-columns:210px 1fr}.right{grid-column:1/-1}.courses{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){header nav{display:none}.layout{grid-template-columns:1fr;padding:10px}.subjects{display:none}.courses{grid-template-columns:1fr}.hero h1{font-size:27px}.search{margin-left:0}.layout .right{grid-column:auto}}
+</style>
+</head>
+<body>
+<header>
+<div><div class="logo"><span>◩</span> Essentials</div><div class="tag">Learn. Connect. Grow.</div></div>
+<div class="search"><input placeholder="Search topics, subjects..."></div>
+<nav><span>⌂ Home</span><span>▣ Study</span><span>♧ Community</span></nav>
+</header>
+
+<div class="layout">
+<aside class="side subjects">
+<h4>SUBJECTS</h4>
+<div class="subject active">▣ Mathematics</div>
+<div class="subject">• 1. Sets</div><div class="subject">• 2. Number Systems</div><div class="subject">• 3. Algebra</div><div class="subject">• 4. Equations</div><div class="subject">• 5. Functions</div><div class="subject">• 6. Coordinate Geometry</div><div class="subject">• 7. Trigonometry</div><div class="subject">• 8. Geometry</div>
+<hr style="border-color:#263754">
+<div class="subject">⚛ Physics</div><div class="subject">⚗ Chemistry</div><div class="subject">⌘ Biology</div><div class="subject">▤ English</div><div class="subject">▣ Computer Science</div>
+</aside>
+
+<main>
+<section class="hero">
+<div class="math">x² + y² = r²<br><br>△ &nbsp;&nbsp; ∫ &nbsp;&nbsp; π</div>
+<div style="color:#c9d3e6">Welcome back! 👋</div>
+<h1>Keep learning, keep growing.</h1>
+<p>Essentials is your space to learn subjects and connect with other learners.</p>
+<button class="btn primary" onclick="openPreview()">▶ PREVIEW</button>
+<button class="btn" onclick="document.querySelector('.comments input').focus()">Explore Community</button>
+</section>
+
+<section class="card section">
+<h2>Continue Your Learning</h2>
+<div class="courses">
+<div class="course"><b>Algebra</b><p>Mathematics</p><span>75% Complete</span><div class="progress"><b style="width:75%"></b></div></div>
+<div class="course"><b>Coordinate Geometry</b><p>Mathematics</p><span>60% Complete</span><div class="progress"><b style="width:60%"></b></div></div>
+<div class="course"><b>Trigonometry</b><p>Mathematics</p><span>45% Complete</span><div class="progress"><b style="width:45%"></b></div></div>
+<div class="course"><b>Statistics</b><p>Mathematics</p><span>30% Complete</span><div class="progress"><b style="width:30%"></b></div></div>
+</div>
+</section>
+
+<section class="card section comments">
+<h2>Community Comments</h2>
+<div class="comment-form"><input id="commentInput" placeholder="Write a comment for everyone..."><button class="btn primary" onclick="postComment()">Post</button></div>
+<div id="commentList">
+<div class="comment"><strong>Brian</strong><small>• Online</small><p>Can someone explain Pythagoras' theorem?</p></div>
+<div class="comment"><strong>Esther</strong><small>• 12 min ago</small><p>The explanation on Sets was awesome!</p></div>
+</div>
+</section>
+</main>
+
+<aside class="right">
+<section class="side">
+<h3>Online Now</h3>
+<div class="online"><div class="avatar">B</div> Brian <span class="dot"></span></div>
+<div class="online"><div class="avatar">E</div> Esther <span class="dot"></span></div>
+<div class="online"><div class="avatar">M</div> Michael <span class="dot"></span></div>
+<div class="online"><div class="avatar">S</div> Sarah <span class="dot"></span></div>
+</section>
+
+<section class="side chat" style="margin-top:18px">
+<h3>Public Chat</h3>
+<div class="messages" id="messages"><div class="message">Brian: Good morning everyone! 🌞</div><div class="message">Esther: Anyone learning Trigonometry today?</div></div>
+<div class="comment-form"><input id="chatInput" placeholder="Type a message..."><button class="btn primary" onclick="sendChat()">Send</button></div>
+</section>
+
+<section class="side video-card">
+<h2 style="margin:0">📹 Video Chat</h2>
+<p class="status" id="joinStatus">Click JOIN to connect to another available learner.</p>
+<button class="btn join" onclick="joinMatch()">📹 JOIN</button>
+</section>
+</aside>
+</div>
+
+<div id="previewModal"><div class="modal"><button class="close" onclick="closePreview()">×</button><h2>Essentials Preview</h2><p>This is the working front-end preview of the Essentials website.</p><div class="video">Your live website preview appears here when hosted online.</div><button class="btn primary" onclick="closePreview()">Close Preview</button></div></div>
+<div id="matchModal"><div class="modal"><button class="close" onclick="closeMatch()">×</button><h2>📹 Video Chat</h2><p id="matchText">Finding another learner...</p><div class="video" id="videoBox">Searching for someone online...</div><button class="btn join" id="cameraBtn" style="display:none" onclick="startCamera()">Enable Camera</button></div></div>
+
+<script>
+function openPreview(){document.getElementById('previewModal').style.display='grid'}
+function closePreview(){document.getElementById('previewModal').style.display='none'}
+function postComment(){
+ const input=document.getElementById('commentInput'); if(!input.value.trim()) return;
+ const d=document.createElement('div'); d.className='comment';
+ d.innerHTML='<strong>You</strong><small>• Just now</small><p></p>'; d.querySelector('p').textContent=input.value;
+ document.getElementById('commentList').prepend(d); input.value='';
+}
+function sendChat(){
+ const i=document.getElementById('chatInput'); if(!i.value.trim()) return;
+ const d=document.createElement('div');d.className='message mine';d.textContent='You: '+i.value;
+ document.getElementById('messages').append(d);i.value='';
+}
+function joinMatch(){
+ document.getElementById('matchModal').style.display='grid';
+ setTimeout(()=>{document.getElementById('matchText').textContent='A learner was found. Connect your camera to begin.';document.getElementById('videoBox').textContent='Ready to start video chat';document.getElementById('cameraBtn').style.display='block';},1600);
+}
+function closeMatch(){document.getElementById('matchModal').style.display='none'}
+async function startCamera(){
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+  const box=document.getElementById('videoBox'); box.innerHTML='';
+  const v=document.createElement('video');v.autoplay=true;v.muted=true;v.playsInline=true;v.srcObject=stream;v.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:12px';box.appendChild(v);
+  document.getElementById('matchText').textContent='Camera connected. Real matching requires the backend/signaling server.';
+ }catch(e){document.getElementById('matchText').textContent='Camera permission was not granted.'}
+}
+document.getElementById('commentInput').addEventListener('keydown',e=>{if(e.key==='Enter')postComment()});
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+</script>
+</body></html>

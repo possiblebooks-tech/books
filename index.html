@@ -1,897 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essentials - Interactive Learning Hub</title>
-    <style>
-        :root {
-            --bg-color: #050b14;
-            --grid-color: rgba(30, 80, 180, 0.25);
-            --primary: #00d2ff;
-            --secondary: #00f5d4;
-            --accent: #ff007f;
-            --text: #ffffff;
-            --card-bg: rgba(10, 25, 50, 0.75);
-            --border: rgba(0, 210, 255, 0.3);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text);
-        }
+<title>ESSENTIALS | Learn Better</title>
 
-        body {
-            background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Ambient glowing background objects */
-        .glog-bg {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
-            top: 10%;
-            left: 5%;
-            pointer-events: none;
-            z-index: -1;
-            animation: floatGlow 10s ease-in-out infinite alternate;
-        }
-        .glog-bg-2 {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 245, 212, 0.1) 0%, transparent 70%);
-            bottom: 10%;
-            right: 5%;
-            pointer-events: none;
-            z-index: -1;
-            animation: floatGlow 12s ease-in-out infinite alternate-reverse;
-        }
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    min-height: 100vh;
 
-        @keyframes floatGlow {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(30px) scale(1.1); }
-        }
+    background-color: #0755b8;
+    background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
+    background-size: 40px 40px;
+}
 
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
-            margin-bottom: 10px;
-        }
+/* HEADER */
 
-        .subtitle {
-            color: #8fa0b5;
-            font-size: 1.1rem;
-        }
+header {
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        /* Subject Button Controls */
-        .subject-controls {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+    background: rgba(0, 20, 70, .8);
+    backdrop-filter: blur(10px);
 
-        .btn-subject {
-            background: var(--card-bg);
-            border: 2px solid var(--primary);
-            padding: 15px 40px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        .btn-subject::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
 
-        .btn-subject:hover::before {
-            left: 100%;
-        }
+.logo span {
+    color: #58d6ff;
+}
 
-        .btn-subject:hover, .btn-subject.active {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px var(--primary);
-            background: var(--primary);
-            color: #000;
-        }
+nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-        .btn-science-color:hover, .btn-science-color.active {
-            box-shadow: 0 0 25px var(--secondary);
-            background: var(--secondary);
-            border-color: var(--secondary);
-            color: #000;
-        }
+/* HERO */
 
-        /* Main Subject Container Panels */
-        .subject-panel {
-            display: none;
-            max-width: 1100px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s ease forwards;
-        }
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.hero h1 {
+    font-size: 50px;
+}
 
-        .panel-grid {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 30px;
-        }
+.hero p {
+    margin-top: 15px;
+    font-size: 19px;
+    opacity: .9;
+}
 
-        @media (max-width: 768px) {
-            .panel-grid { grid-template-columns: 1fr; }
-        }
+.start-btn {
+    margin-top: 25px;
+    padding: 14px 35px;
+    border: none;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #0755b8;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        /* Sidebar Topics List */
-        .topics-sidebar {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            height: fit-content;
-        }
+/* SUBJECTS */
 
-        .topics-sidebar h3 {
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--primary);
-        }
+.subjects {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
 
-        .topic-item {
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid transparent;
-        }
+.section-title {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 30px;
+}
 
-        .topic-item:hover, .topic-item.active {
-            background: rgba(0, 210, 255, 0.1);
-            border-left-color: var(--primary);
-            transform: translateX(5px);
-        }
+.subject-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-        /* Interactive Display Area */
-        .content-display {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            min-height: 450px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.subject-card {
+    width: 300px;
+    min-height: 210px;
+    padding: 25px;
 
-        .topic-view {
-            display: none;
-        }
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px;
 
-        .topic-view.active {
-            display: block;
-            animation: fadeIn 0.3s ease forwards;
-        }
+    text-align: center;
+    cursor: pointer;
 
-        /* Videos, Graphics, Equations styling */
-        .visual-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 220px;
-        }
+    transition: .3s;
+}
 
-        .intro-video-container {
-            width: 100%;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
+.subject-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,.22);
+}
 
-        .intro-video-container video {
-            width: 100%;
-            display: block;
-        }
+.subject-icon {
+    font-size: 65px;
+}
 
-        .equation-box {
-            background: rgba(0, 210, 255, 0.05);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-        }
+.subject-card h2 {
+    margin: 15px 0;
+}
 
-        .step-list {
-            margin-top: 15px;
-            padding-left: 20px;
-        }
+/* TOPICS */
 
-        .step-list li {
-            margin-bottom: 10px;
-            color: #cbd5e1;
-        }
+.topic-area {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+}
 
-        /* Advanced Vector Animation - Crop Growth */
-        .crop-svg {
-            width: 150px;
-            height: 200px;
-        }
-        .soil { fill: #4a3728; }
-        .stem { stroke: var(--secondary); stroke-width: 4; fill: none; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growStem 4s infinite linear; }
-        .leaf { fill: var(--secondary); opacity: 0; animation: bloomLeaf 4s infinite linear; }
-        .leaf-left { transform-origin: 75px 120px; }
-        .leaf-right { transform-origin: 75px 90px; }
+.topics {
+    display: none;
+    animation: appear .5s;
+}
 
-        @keyframes growStem {
-            0% { stroke-dashoffset: 200; }
-            40%, 100% { stroke-dashoffset: 0; }
-        }
-        @keyframes bloomLeaf {
-            0%, 30% { opacity: 0; transform: scale(0); }
-            50%, 100% { opacity: 1; transform: scale(1); }
-        }
+.topics.active {
+    display: block;
+}
 
-        /* Advanced Vector Animation - Sperm Race */
-        .sperm-svg {
-            width: 100%;
-            height: 180px;
-            background: #020710;
-        }
-        .egg { fill: #ff007f; stroke: #ff66b2; stroke-width: 4; filter: drop-shadow(0 0 10px #ff007f); }
-        .sperm { fill: #fff; }
-        .sperm-tail { stroke: #fff; stroke-width: 2; fill: none; }
-        
-        .sperm-runner-1 { animation: race1 3s infinite linear; }
-        .sperm-runner-2 { animation: race2 3s infinite linear; }
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 
-        @keyframes race1 {
-            0% { transform: translate(-20px, 40px); }
-            100% { transform: translate(175px, -15px); }
-        }
-        @keyframes race2 {
-            0% { transform: translate(-40px, -30px); }
-            100% { transform: translate(165px, 15px); }
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* Advanced Vector Animation - Geometric Construction */
-        .geom-svg {
-            width: 260px;
-            height: 200px;
-        }
-        .ruler-line { stroke: #555; stroke-width: 1; stroke-dasharray: 4; }
-        .construct-path { stroke: var(--primary); stroke-width: 3; fill: none; stroke-dasharray: 400; stroke-dashoffset: 400; animation: drawShape 5s infinite ease-in-out; }
-        .compass-arc { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.5; fill: none; stroke-dasharray: 50; stroke-dashoffset: 50; animation: drawArc 5s infinite ease-in-out; }
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 15px;
+}
 
-        @keyframes drawArc {
-            0%, 10% { stroke-dashoffset: 50; }
-            30%, 100% { stroke-dashoffset: 0; }
-        }
-        @keyframes drawShape {
-            0%, 35% { stroke-dashoffset: 400; }
-            70%, 100% { stroke-dashoffset: 0; }
-        }
+.topic-btn {
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
 
-        /* Chat Overlay Widget Systems */
-        .chat-widget-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 15px;
-            z-index: 1000;
-        }
+    background: white;
+    color: #0755b8;
 
-        .widget-trigger {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: none;
-        }
+    font-size: 17px;
+    font-weight: bold;
 
-        .widget-trigger:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
+    transition: .3s;
+}
 
-        .trigger-text-msg { background: linear-gradient(135deg, #0076ff, #00d2ff); }
-        .trigger-video-chat { background: linear-gradient(135deg, #00cc66, #00f5d4); }
+.topic-btn:hover {
+    background: #58d6ff;
+    transform: scale(1.05);
+}
 
-        .widget-trigger svg {
-            width: 28px;
-            height: 28px;
-            fill: #fff;
-        }
+/* LESSON BOX */
 
-        /* Comment System Window */
-        .chat-window {
-            position: absolute;
-            bottom: 85px;
-            right: 0;
-            width: 350px;
-            height: 460px;
-            background: rgba(10, 20, 38, 0.95);
-            border: 2px solid var(--primary);
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            animation: panelPop 0.3s ease forwards;
-        }
+.lesson {
+    display: none;
+    margin-top: 30px;
 
-        /* Live Embedded Fully-Functional Peer-to-Peer Video Chat Platform Window */
-        .video-window {
-            position: absolute;
-            bottom: 85px;
-            right: 75px;
-            width: 400px;
-            height: 520px;
-            background: rgba(12, 15, 28, 0.98);
-            border: 2px solid var(--secondary);
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-            animation: panelPop 0.3s ease forwards;
-        }
+    background: rgba(0,0,40,.55);
+    padding: 30px;
+    border-radius: 20px;
 
-        @keyframes panelPop {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
+    animation: appear .5s;
+}
 
-        .window-header {
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+.lesson.active {
+    display: block;
+}
 
-        .window-header h4 {
-            font-weight: 600;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.example {
+    margin-top: 20px;
+    padding: 20px;
 
-        .close-window {
-            background: transparent;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #8fa0b5;
-        }
-        .close-window:hover { color: #fff; }
+    background: rgba(255,255,255,.12);
+    border-radius: 15px;
+}
 
-        /* Comment System Elements */
-        .comments-output {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+/* ALGEBRA ANIMATION */
 
-        .comment-node {
-            background: rgba(255,255,255,0.04);
-            padding: 10px 12px;
-            border-radius: 8px;
-            border-left: 3px solid var(--primary);
-        }
-        .comment-node .meta {
-            font-size: 0.75rem;
-            color: var(--primary);
-            margin-bottom: 4px;
-            font-weight: bold;
-        }
-        .comment-node .body {
-            font-size: 0.9rem;
-            word-break: break-word;
-        }
+.equation {
+    text-align: center;
+    font-size: 35px;
+    margin: 30px;
+}
 
-        .comment-input-area {
-            padding: 12px;
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            gap: 8px;
-        }
+.step {
+    opacity: 0;
+    animation: equationSteps 8s infinite;
+}
 
-        .comment-input-area input {
-            flex: 1;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px;
-            border-radius: 8px;
-            outline: none;
-        }
-        .comment-input-area input:focus { border-color: var(--primary); }
+.step:nth-child(1) {
+    animation-delay: 0s;
+}
 
-        .comment-input-area button {
-            background: var(--primary);
-            color: #000;
-            border: none;
-            padding: 0 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.step:nth-child(2) {
+    animation-delay: 2s;
+}
 
-        /* Fully Functional Jitsi WebRTC Video Chat Engine UI */
-        .video-runtime-container {
-            flex: 1;
-            background: #000;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+.step:nth-child(3) {
+    animation-delay: 4s;
+}
 
-        #jitsi-iframe-target {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+.step:nth-child(4) {
+    animation-delay: 6s;
+}
 
-        .video-setup-screen {
-            position: absolute;
-            top:0; left:0; width:100%; height:100%;
-            background: #0a1120;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            text-align: center;
-            z-index: 10;
-        }
+@keyframes equationSteps {
+    0%, 20% {
+        opacity: 0;
+    }
 
-        .video-setup-screen p {
-            font-size: 0.9rem;
-            color: #8fa0b5;
-            margin: 15px 0 25px 0;
-        }
+    30%, 90% {
+        opacity: 1;
+    }
 
-        .btn-launch-room {
-            background: var(--secondary);
-            color: #000;
-            font-weight: bold;
-            padding: 12px 25px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 245, 212, 0.4);
-            transition: 0.2s;
-        }
-        .btn-launch-room:hover { transform: translateY(-2px); }
+    100% {
+        opacity: 0;
+    }
+}
 
-        /* Notification Toast */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 210, 255, 0.9);
-            color: #000;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: none;
-            animation: fadeIn 0.3s ease, fadeOut 0.3s ease 3s forwards;
-            z-index: 2000;
-        }
-    </style>
+/* GEOMETRY ANIMATION */
+
+.geometry-animation {
+    height: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.ruler {
+    width: 220px;
+    height: 30px;
+
+    background: #f4c542;
+    position: absolute;
+    top: 30px;
+
+    color: black;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.shape {
+    width: 0;
+    height: 0;
+
+    border: 4px solid #58d6ff;
+
+    animation: drawShape 6s infinite;
+}
+
+@keyframes drawShape {
+
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    40% {
+        width: 180px;
+        height: 0;
+    }
+
+    70%,100% {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* CROP ANIMATION */
+
+.farm {
+    height: 300px;
+    position: relative;
+
+    background: linear-gradient(#63c8ff 65%, #5c9b3b 65%);
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.seed {
+    position: absolute;
+
+    bottom: 35px;
+    left: 48%;
+
+    width: 15px;
+    height: 15px;
+
+    background: brown;
+    border-radius: 50%;
+
+    animation: growPlant 7s infinite;
+}
+
+.stem {
+    position: absolute;
+
+    width: 10px;
+    background: green;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    animation: stemGrow 7s infinite;
+}
+
+.leaf {
+    position: absolute;
+
+    width: 60px;
+    height: 30px;
+
+    background: green;
+    border-radius: 100% 0;
+
+    bottom: 150px;
+    left: 50%;
+
+    animation: leafGrow 7s infinite;
+}
+
+.leaf.two {
+    transform: rotate(180deg);
+    left: 43%;
+}
+
+@keyframes stemGrow {
+    0%,20% {
+        height: 0;
+    }
+
+    70%,100% {
+        height: 150px;
+    }
+}
+
+@keyframes leafGrow {
+
+    0%,50% {
+        transform: scale(0);
+    }
+
+    80%,100% {
+        transform: scale(1);
+    }
+}
+
+/* EGG AND SPERM */
+
+.bio-animation {
+    height: 300px;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #071a45;
+    border-radius: 15px;
+}
+
+.egg {
+    position: absolute;
+
+    right: 15%;
+    top: 100px;
+
+    width: 90px;
+    height: 90px;
+
+    background: #ffd7b5;
+    border-radius: 50%;
+
+    box-shadow: 0 0 30px #ffcc99;
+}
+
+.sperm {
+    position: absolute;
+
+    left: 5%;
+    top: 130px;
+
+    width: 30px;
+    height: 15px;
+
+    background: white;
+    border-radius: 50%;
+
+    animation: spermMove 5s infinite linear;
+}
+
+.tail {
+    position: absolute;
+
+    width: 60px;
+    height: 3px;
+
+    background: white;
+
+    left: -50px;
+    top: 6px;
+
+    transform-origin: right;
+
+    animation: tailMove .3s infinite alternate;
+}
+
+@keyframes spermMove {
+    0% {
+        left: 5%;
+    }
+
+    80% {
+        left: 65%;
+    }
+
+    100% {
+        left: 65%;
+    }
+}
+
+@keyframes tailMove {
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(20deg);
+    }
+}
+
+/* CHAT */
+
+.chat-section {
+    width: 90%;
+    max-width: 700px;
+    margin: 70px auto;
+}
+
+.chat-box {
+    background: rgba(0,0,40,.6);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+#messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    background: rgba(255,255,255,.15);
+    padding: 10px;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+}
+
+.chat-input button {
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #58d6ff;
+    cursor: pointer;
+}
+
+/* VIDEO CHAT */
+
+.video-section {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+video {
+    width: 100%;
+    max-width: 500px;
+
+    border-radius: 20px;
+    background: black;
+}
+
+.video-btn {
+    margin: 15px;
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #58d6ff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
+
+    background: rgba(0,0,40,.7);
+}
+
+</style>
 </head>
+
+
 <body>
 
-    <div class="glog-bg"></div>
-    <div class="glog-bg-2"></div>
+<header>
 
-    <header>
-        <h1>Essentials</h1>
-        <p class="subtitle">The Core Foundations of Mathematics & Science - Fully Interactive Playground</p>
-    </header>
+<div class="logo">
+ESSEN<span>TIALS</span>
+</div>
 
-    <!-- Subject Switcher controls -->
-    <div class="subject-controls">
-        <button class="btn-subject btn-math-color" onclick="switchSubject('math')">Mathematics</button>
-        <button class="btn-subject btn-science-color" onclick="switchSubject('science')">Science</button>
-    </div>
+<nav>
+<button onclick="showSubjects()">Subjects</button>
+<button onclick="scrollToChat()">Comments</button>
+<button onclick="scrollToVideo()">Video Chat</button>
+</nav>
 
-    <!-- MATHEMATICS HUB PANEL -->
-    <div id="panel-math" class="subject-panel">
-        <!-- Interactive Theme Intro Video Embedded via Standard Video Element -->
-        <div class="intro-video-container">
-            <video autoplay loop muted playsinline>
-                <!-- Generated programmatic loop visual backup stream -->
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31911-large.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="panel-grid">
-            <aside class="topics-sidebar">
-                <h3>Math Modules</h3>
-                <div class="topic-item active" onclick="switchTopic('math', 'sets', this)">Theory of Sets</div>
-                <div class="topic-item" onclick="switchTopic('math', 'algebra', this)">Interactive Algebra</div>
-                <div class="topic-item" onclick="switchTopic('math', 'geometry', this)">Precision Geometry</div>
-            </aside>
-
-            <main class="content-display">
-                <!-- SETS VIEW -->
-                <div id="math-sets" class="topic-view active">
-                    <h2>Theory of Sets</h2>
-                    <p style="margin-top: 10px; color: #cbd5e1;">A set is a well-defined collection of distinct objects. Below is a mathematical formulation of set intersections.</p>
-                    <div class="equation-box">
-                        A &cap; B = { x | x &isin; A and x &isin; B }
-                    </div>
-                    <div class="visual-box">
-                        <!-- Intersecting Venn Diagram Vector -->
-                        <svg width="200" height="120" viewBox="0 0 200 120">
-                            <circle cx="70" cy="60" r="45" fill="rgba(0, 210, 255, 0.3)" stroke="var(--primary)" stroke-width="2" />
-                            <circle cx="130" cy="60" r="45" fill="rgba(0, 245, 212, 0.3)" stroke="var(--secondary)" stroke-width="2" />
-                            <text x="40" y="62" fill="#fff" font-size="12">Set A</text>
-                            <text x="135" y="62" fill="#fff" font-size="12">Set B</text>
-                            <text x="92" y="62" fill="#fff" font-weight="bold" font-size="10">&cap;</text>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- ALGEBRA VIEW -->
-                <div id="math-algebra" class="topic-view">
-                    <h2>Interactive Algebra</h2>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Isolating variables to identify hidden unknowns inside balanced formulas.</p>
-                    <div class="equation-box">
-                        3x + 7 = 22
-                    </div>
-                    <ul class="step-list">
-                        <li><strong>Step 1 (Isolate modifier):</strong> Subtract 7 from both sides &rarr; 3x = 22 - 7</li>
-                        <li><strong>Step 2 (Simplify expression):</strong> 3x = 15</li>
-                        <li><strong>Step 3 (Extract unknown x):</strong> Divide by 3 &rarr; x = 15 / 3 &rarr; <strong>x = 5</strong></li>
-                    </ul>
-                </div>
-
-                <!-- GEOMETRY VIEW -->
-                <div id="math-geometry" class="topic-view">
-                    <h2>Precision Geometry Construction</h2>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Real-time construction demonstration tracking line dimension layout rules prior to final segment rendering.</p>
-                    <div class="visual-box">
-                        <svg class="geom-svg" viewBox="0 0 260 200">
-                            <!-- Baseline Ruler Guideline -->
-                            <line x1="20" y1="160" x2="240" y2="160" class="ruler-line" />
-                            <text x="25" y="180" fill="#8fa0b5" font-size="10">0cm (Origin Point)</text>
-                            <text x="185" y="180" fill="#8fa0b5" font-size="10">Base Limit (160px)</text>
-                            
-                            <!-- Compass Arc Phase -->
-                            <path d="M 180,160 A 100,100 0 0,0 70,80" class="compass-arc" />
-                            
-                            <!-- Dynamic Precision Polygon Shape Trace -->
-                            <polygon points="30,160 190,160 110,60" class="construct-path" />
-                        </svg>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- SCIENCE HUB PANEL -->
-    <div id="panel-science" class="subject-panel">
-        <!-- Interactive Theme Intro Video Embedded via Standard Video Element -->
-        <div class="intro-video-container">
-            <video autoplay loop muted playsinline>
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-laser-lights-background-loop-41743-large.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="panel-grid">
-            <aside class="topics-sidebar">
-                <h3>Science Modules</h3>
-                <div class="topic-item active" onclick="switchTopic('science', 'biology', this)">Agricultural Biology</div>
-                <div class="topic-item" onclick="switchTopic('science', 'cellular', this)">Cellular Reproduction</div>
-            </aside>
-
-            <main class="content-display">
-                <!-- BIOLOGY VIEW -->
-                <div id="science-biology" class="topic-view active">
-                    <h2>Agricultural Biology & Crop Growth</h2>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Tracking real-time cellular elongation and sprout generation combined with photosynthetic conversion logic.</p>
-                    
-                    <div class="visual-box">
-                        <svg class="crop-svg" viewBox="0 0 150 200">
-                            <!-- Soil segment -->
-                            <rect x="0" y="150" width="150" height="50" class="soil" />
-                            <!-- Elongating Stem path -->
-                            <path d="M 75,150 Q 65,100 75,40" class="stem" />
-                            <!-- Left Leaf -->
-                            <path d="M 72,120 Q 40,110 55,130 Q 72,125 72,120" class="leaf leaf-left" />
-                            <!-- Right Leaf -->
-                            <path d="M 74,90 Q 110,80 95,100 Q 74,95 74,90" class="leaf leaf-right" />
-                        </svg>
-                    </div>
-
-                    <div class="equation-box">
-                        6CO₂ + 6H₂O + Light &rarr; C₆H₁₂O₆ + 6O₂
-                    </div>
-                </div>
-
-                <!-- CELLULAR VIEW -->
-                <div id="science-cellular" class="topic-view">
-                    <h2>Cellular Motility & Reproduction</h2>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Kinetic modeling mapping dynamic sperm cell propulsion mechanics moving towards the target egg membrane layout.</p>
-                    
-                    <div class="visual-box" style="padding: 0;">
-                        <svg class="sperm-svg" viewBox="0 0 300 180">
-                            <!-- Target Egg Cell -->
-                            <circle cx="260" cy="90" r="40" class="egg" />
-                            
-                            <!-- Sperm Cell 1 Structure -->
-                            <g class="sperm-runner-1">
-                                <ellipse cx="30" cy="50" rx="8" ry="5" class="sperm" />
-                                <path d="M 22,50 Q 15,45 10,50 T 0,50" class="sperm-tail" />
-                            </g>
-
-                            <!-- Sperm Cell 2 Structure -->
-                            <g class="sperm-runner-2">
-                                <ellipse cx="40" cy="120" rx="8" ry="5" class="sperm" />
-                                <path d="M 32,120 Q 25,125 20,120 T 10,120" class="sperm-tail" />
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
+</header>
 
 
-    <!-- INTERACTIVE FLOATING COMMUNICATIONS HUD OVERLAYS -->
-    <div class="chat-widget-container">
-        
-        <!-- Live Real-Time Multi-User Jitsi WebRTC Video Chat Platform Trigger -->
-        <button class="widget-trigger trigger-video-chat" onclick="toggleWidget('video-chat-hub')" title="Launch Video Chat Engine">
-            <svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 childhood-.45-1-1V13.5l4 4v-11l-4 4zM14 16H5V8h9v8z"/></svg>
-        </button>
+<section class="hero">
 
-        <!-- Message/Comment System Panel Trigger -->
-        <button class="widget-trigger trigger-text-msg" onclick="toggleWidget('comment-hub')" title="Open Global Discussion Feed">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-        </button>
+<h1>Learn. Watch. Understand.</h1>
 
-        <!-- Dynamic Message Box Structure Layout -->
-        <div id="comment-hub" class="chat-window">
-            <div class="window-header">
-                <h4>Discussion Board Feed</h4>
-                <button class="close-window" onclick="toggleWidget('comment-hub')">&times;</button>
-            </div>
-            <div class="comments-output" id="comments-box">
-                <div class="comment-node">
-                    <div class="meta">Teacher Alex • Just Now</div>
-                    <div class="body">Welcome to Essentials! Drop your equations or system questions right here in the chat channel!</div>
-                </div>
-            </div>
-            <div class="comment-input-area">
-                <input type="text" id="comment-payload" placeholder="Type a note or query..." onkeydown="if(event.key === 'Enter') submitComment()">
-                <button onclick="submitComment()">Post</button>
-            </div>
-        </div>
+<p>
+ESSENTIALS makes learning Mathematics and Science more visual,
+interactive and enjoyable.
+</p>
 
-        <!-- Fully-Functional Instant Serverless WebRTC Multi-User Video Chat Room Engine Platform Sandbox -->
-        <div id="video-chat-hub" class="video-window">
-            <div class="window-header">
-                <h4>Live WebRTC Group Video Chat</h4>
-                <button class="close-window" onclick="toggleWidget('video-chat-hub')">&times;</button>
-            </div>
-            <div class="video-runtime-container">
-                <!-- Initial Room Generation Setup Interactive Controller Overlay screen -->
-                <div id="video-setup" class="video-setup-screen">
-                    <svg style="width:50px; height:50px; fill:var(--secondary);" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
-                    <p>Launch an instant, live global encrypted multi-user real-time voice, video, and screen-sharing presentation workspace using dynamic WebRTC frameworks.</p>
-                    <button class="btn-launch-room" onclick="initializeLiveVideoConference()">Connect Instantly</button>
-                </div>
-                <!-- Frame mount point where Jitsi script inserts active audio/video feeds directly -->
-                <div id="jitsi-iframe-target"></div>
-            </div>
-        </div>
+<button class="start-btn" onclick="showSubjects()">
+Start Learning
+</button>
 
-    </div>
-
-    <!-- Notification Engine Toast Layer System -->
-    <div id="toast-layer" class="toast"></div>
+</section>
 
 
-    <!-- JITSI EXTERNAL LIB INTEGRATION: Highly scalable instant group audio/video server streaming runtime -->
-    <script src="https://meet.jit.si/external_api.js"></script>
+<section class="subjects" id="subjects">
 
-    <script>
-        // System State
-        let currentSubject = '';
+<h2 class="section-title">Choose Your Subject</h2>
 
-        // Switch Subjects Panel Display Action
-        function switchSubject(subject) {
-            // Reset active button statuses
-            document.querySelectorAll('.btn-subject').forEach(btn => btn.classList.remove('active'));
-            
-            // Hide all containers
-            document.getElementById('panel-math').style.display = 'none';
-            document.getElementById('panel-science').style.display = 'none';
+<div class="subject-container">
 
-            // Show selected subject container
-            if(subject === 'math') {
-                document.getElementById('panel-math').style.display = 'block';
-                document.querySelector('.btn-math-color').classList.add('active');
-                showToast("Loaded Mathematics Subject Suite");
-            } else if(subject === 'science') {
-                document.getElementById('panel-science').style.display = 'block';
-                document.querySelector('.btn-science-color').classList.add('active');
-                showToast("Loaded Science Subject Suite");
-            }
-            currentSubject = subject;
-        }
+<div class="subject-card" onclick="openTopics('math')">
 
-        // Sidebar Sub-topic Switching Script logic
-        function switchTopic(subject, topicId, element) {
-            // Remove active classes inside context sidebar area
-            const sidebar = element.parentElement;
-            sidebar.querySelectorAll('.topic-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
+<div class="subject-icon">➗</div>
 
-            // Hide sibling sub-views in display viewport area
-            const displayPanel = sidebar.nextElementSibling;
-            displayPanel.querySelectorAll('.topic-view').forEach(view => view.classList.remove('active'));
+<h2>Mathematics</h2>
 
-            // Wake targeted component module block view
-            const targetView = document.getElementById(`${subject}-${topicId}`);
-            if(targetView) {
-                targetView.classList.add('active');
-            }
-        }
+<p>
+Learn through equations, examples and animated constructions.
+</p>
 
-        // Toggle Floating UI Elements visibility
-        function toggleWidget(id) {
-            const el = document.getElementById(id);
-            const isVisible = el.style.display === 'flex';
-            
-            // Close other elements first to avoid overlaps
-            document.getElementById('comment-hub').style.display = 'none';
-            document.getElementById('video-chat-hub').style.display = 'none';
-            
-            el.style.display = isVisible ? 'none' : 'flex';
-        }
+</div>
 
-        // Submit message text feedback logic strings
-        function submitComment() {
-            const input = document.getElementById('comment-payload');
-            const val = input.value.trim();
-            if(!val) return;
 
-            const box = document.getElementById('comments-box');
-            const newNode = document.createElement('div');
-            newNode.className = 'comment-node';
-            newNode.innerHTML = `
-                <div class="meta">Student Guest • Just Now</div>
-                <div class="body">${escapeHTML(val)}</div>
-            `;
-            box.appendChild(newNode);
-            box.scrollTop = box.scrollHeight; // Keep auto scrolled down
+<div class="subject-card" onclick="openTopics('science')">
 
-            input.value = '';
-            showToast("Comment added to board feed!");
-        }
+<div class="subject-icon">🔬</div>
 
-        // HTML sanitizer utility method helper
-        function escapeHTML(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-        }
+<h2>Science</h2>
 
-        // Launch Fully Functional Multi-user WebRTC Video Space Room instantly via external serverless Jitsi API
-        function initializeLiveVideoConference() {
-            // Remove initial placeholder screen layer 
-            document.getElementById('video-setup').style.display = 'none';
+<p>
+Explore life, plants, reproduction and the world around us.
+</p>
 
-            // Generate an isolated, completely unique randomized room hash to prevent overlapping stranger calls
-            const randomRoomId = "EssentialsHubRoom_" + Math.floor(Math.random() * 900000 + 100000);
+</div>
 
-            const domain = "meet.jit.si";
-            const options = {
-                roomName: randomRoomId,
-                width: '100%',
-                height: '100%',
-                parentNode: document.getElementById('jitsi-iframe-target'),
-                configOverwrite: {
-                    startWithAudioMuted: false,
-                    startWithVideoMuted: false,
-                    prejoinPageEnabled: false // Bypass entry pages for instant connections
-                },
-                interfaceConfigOverwrite: {
-                    TOOLBAR_BUTTONS: [
-                        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-                        'factions', 'hangup', 'profile', 'chat', 'raisehand',
-                        'videoquality', 'filmstrip', 'shortcuts', 'tileview'
-                    ],
-                    SETTINGS_SECTIONS: [ 'devices', 'language', 'profile' ],
-                }
-            };
+</div>
 
-            // Instantiate active WebRTC frame loop
-            const api = new JitsiMeetExternalAPI(domain, options);
-            
-            showToast("Connected to Secure WebRTC Video Hub!");
-        }
+</section>
 
-        // Global Alert feedback messaging layer toast trigger utility
-        function showToast(msg) {
-            const toast = document.getElementById('toast-layer');
-            toast.innerText = msg;
-            toast.style.display = 'block';
-            
-            // Auto hide reset action
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-    </script>
+
+
+<!-- MATHEMATICS TOPICS -->
+
+<section class="topic-area">
+
+<div class="topics" id="math">
+
+<h2 class="section-title">Mathematics Topics</h2>
+
+<div class="topic-grid">
+
+<button class="topic-btn" onclick="openLesson('sets')">
+Sets
+</button>
+
+<button class="topic-btn" onclick="openLesson('numbers')">
+Numbers
+</button>
+
+<button class="topic-btn" onclick="openLesson('algebra')">
+Algebra
+</button>
+
+<button class="topic-btn" onclick="openLesson('geometry')">
+Geometry
+</button>
+
+<button class="topic-btn" onclick="openLesson('fractions')">
+Fractions
+</button>
+
+<button class="topic-btn" onclick="openLesson('statistics')">
+Statistics
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- SCIENCE TOPICS -->
+
+<div class="topics" id="science">
+
+<h2 class="section-title">Science Topics</h2>
+
+<div class="topic-grid">
+
+<button class="topic-btn" onclick="openLesson('plants')">
+Plants
+</button>
+
+<button class="topic-btn" onclick="openLesson('reproduction')">
+Reproduction
+</button>
+
+<button class="topic-btn" onclick="openLesson('animals')">
+Animals
+</button>
+
+<button class="topic-btn" onclick="openLesson('matter')">
+Matter
+</button>
+
+<button class="topic-btn" onclick="openLesson('energy')">
+Energy
+</button>
+
+<button class="topic-btn" onclick="openLesson('humanbody')">
+Human Body
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ALGEBRA -->
+
+<div class="lesson" id="algebra">
+
+<h2>Algebra: Finding an Unknown</h2>
+
+<div class="example">
+
+<h3>Example: Find x</h3>
+
+<div class="equation">
+
+<div class="step">x + 5 = 12</div>
+
+<div class="step">Subtract 5 from both sides</div>
+
+<div class="step">x = 12 − 5</div>
+
+<div class="step">x = 7 ✓</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- GEOMETRY -->
+
+<div class="lesson" id="geometry">
+
+<h2>Geometry: Constructing a Square</h2>
+
+<p>
+First measure the required dimensions, then draw the sides carefully.
+</p>
+
+<div class="geometry-animation">
+
+<div class="ruler">
+Measure: 5 cm
+</div>
+
+<div class="shape"></div>
+
+</div>
+
+<div class="example">
+
+<h3>Steps</h3>
+
+<p>1. Measure the required length.</p>
+<p>2. Mark the points.</p>
+<p>3. Use a ruler to draw straight lines.</p>
+<p>4. Complete the shape.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- SETS -->
+
+<div class="lesson" id="sets">
+
+<h2>Sets</h2>
+
+<div class="example">
+
+<p><b>Example:</b></p>
+
+<p>
+A = {1, 2, 3, 4}
+</p>
+
+<p>
+B = {3, 4, 5, 6}
+</p>
+
+<p>
+A ∩ B = {3, 4}
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- PLANTS -->
+
+<div class="lesson" id="plants">
+
+<h2>Science: How a Crop Grows</h2>
+
+<div class="farm">
+
+<div class="seed"></div>
+
+<div class="stem"></div>
+
+<div class="leaf"></div>
+
+<div class="leaf two"></div>
+
+</div>
+
+<div class="example">
+
+<h3>Stages of Growth</h3>
+
+<p>
+Seed → Germination → Seedling → Growing Plant → Mature Plant
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- REPRODUCTION -->
+
+<div class="lesson" id="reproduction">
+
+<h2>Science: Fertilisation</h2>
+
+<div class="bio-animation">
+
+<div class="egg"></div>
+
+<div class="sperm">
+
+<div class="tail"></div>
+
+</div>
+
+</div>
+
+<div class="example">
+
+<p>
+Fertilisation occurs when a sperm cell successfully joins an egg cell,
+combining genetic material to begin the development of a new organism.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- OTHER SIMPLE LESSONS -->
+
+<div class="lesson" id="numbers">
+
+<h2>Numbers</h2>
+
+<div class="example">
+<p>Example: 25 + 17 = 42</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="fractions">
+
+<h2>Fractions</h2>
+
+<div class="example">
+<p>Example: 1/2 + 1/4 = 3/4</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="statistics">
+
+<h2>Statistics</h2>
+
+<div class="example">
+<p>Example: Find the average of 2, 4, 6.</p>
+<p>(2 + 4 + 6) ÷ 3 = 4</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="animals">
+
+<h2>Animals</h2>
+
+<div class="example">
+<p>Animals can be grouped into vertebrates and invertebrates.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="matter">
+
+<h2>Matter</h2>
+
+<div class="example">
+<p>The three common states of matter are solid, liquid and gas.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="energy">
+
+<h2>Energy</h2>
+
+<div class="example">
+<p>Energy allows things to move, grow, produce heat and perform work.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="humanbody">
+
+<h2>Human Body</h2>
+
+<div class="example">
+<p>The human body contains different systems working together.</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- COMMENTS -->
+
+<section class="chat-section" id="chat">
+
+<h2 class="section-title">💬 Comments & Discussion</h2>
+
+<div class="chat-box">
+
+<div id="messages">
+
+<div class="message">
+Welcome to the ESSENTIALS discussion area!
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+id="messageInput"
+placeholder="Leave a comment..."
+>
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- VIDEO CHAT -->
+
+<section class="video-section" id="videoChat">
+
+<h2 class="section-title">📹 Video Chat</h2>
+
+<p>
+Connect with other learners and discuss your lessons.
+</p>
+
+<br>
+
+<video id="localVideo" autoplay muted></video>
+
+<br>
+
+<button class="video-btn" onclick="startCamera()">
+Start Camera
+</button>
+
+<button class="video-btn" onclick="stopCamera()">
+Stop Camera
+</button>
+
+</section>
+
+
+
+<footer>
+
+<h3>ESSENTIALS</h3>
+
+<p>
+Making learning visual, interactive and easier to understand.
+</p>
+
+</footer>
+
+
+
+<script>
+
+function showSubjects() {
+
+document
+.getElementById("subjects")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function openTopics(subject) {
+
+document
+.querySelectorAll(".topics")
+.forEach(function(topic) {
+
+topic.classList.remove("active");
+
+});
+
+
+document
+.getElementById(subject)
+.classList.add("active");
+
+
+document
+.getElementById(subject)
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function openLesson(lesson) {
+
+document
+.querySelectorAll(".lesson")
+.forEach(function(item) {
+
+item.classList.remove("active");
+
+});
+
+
+let selected =
+document.getElementById(lesson);
+
+
+if(selected) {
+
+selected.classList.add("active");
+
+selected.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+}
+
+
+function sendMessage() {
+
+let input =
+document.getElementById("messageInput");
+
+let message =
+input.value.trim();
+
+
+if(message !== "") {
+
+let messageBox =
+document.getElementById("messages");
+
+let newMessage =
+document.createElement("div");
+
+newMessage.className =
+"message";
+
+newMessage.textContent =
+message;
+
+messageBox.appendChild(newMessage);
+
+input.value = "";
+
+messageBox.scrollTop =
+messageBox.scrollHeight;
+
+}
+
+}
+
+
+function scrollToChat() {
+
+document
+.getElementById("chat")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function scrollToVideo() {
+
+document
+.getElementById("videoChat")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+let stream;
+
+
+async function startCamera() {
+
+try {
+
+stream =
+await navigator.mediaDevices.getUserMedia({
+
+video: true,
+audio: true
+
+});
+
+
+document
+.getElementById("localVideo")
+.srcObject = stream;
+
+}
+
+catch(error) {
+
+alert(
+"Camera access was denied or is unavailable."
+);
+
+}
+
+}
+
+
+function stopCamera() {
+
+if(stream) {
+
+stream
+.getTracks()
+.forEach(track => track.stop());
+
+}
+
+}
+
+</script>
+
 </body>
 </html>

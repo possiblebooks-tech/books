@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ESSENTIALS | Learn Better</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    min-height: 100vh;
+
+    background-color: #0755b8;
+    background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+
+    background-size: 40px 40px;
+}
+
+/* HEADER */
+
+header {
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(0, 20, 70, .8);
+    backdrop-filter: blur(10px);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: #58d6ff;
+}
+
+nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+.hero p {
+    margin-top: 15px;
+    font-size: 19px;
+    opacity: .9;
+}
+
+.start-btn {
+    margin-top: 25px;
+    padding: 14px 35px;
+    border: none;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #0755b8;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* SUBJECTS */
+
+.subjects {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 30px;
+}
+
+.subject-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.subject-card {
+    width: 300px;
+    min-height: 210px;
+    padding: 25px;
+
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.subject-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,.22);
+}
+
+.subject-icon {
+    font-size: 65px;
+}
+
+.subject-card h2 {
+    margin: 15px 0;
+}
+
+/* TOPICS */
+
+.topic-area {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.topics {
+    display: none;
+    animation: appear .5s;
+}
+
+.topics.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 15px;
+}
+
+.topic-btn {
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    background: white;
+    color: #0755b8;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.topic-btn:hover {
+    background: #58d6ff;
+    transform: scale(1.05);
+}
+
+/* LESSON BOX */
+
+.lesson {
+    display: none;
+    margin-top: 30px;
+
+    background: rgba(0,0,40,.55);
+    padding: 30px;
+    border-radius: 20px;
+
+    animation: appear .5s;
+}
+
+.lesson.active {
+    display: block;
+}
+
+.example {
+    margin-top: 20px;
+    padding: 20px;
+
+    background: rgba(255,255,255,.12);
+    border-radius: 15px;
+}
+
+/* ALGEBRA ANIMATION */
+
+.equation {
+    text-align: center;
+    font-size: 35px;
+    margin: 30px;
+}
+
+.step {
+    opacity: 0;
+    animation: equationSteps 8s infinite;
+}
+
+.step:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.step:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.step:nth-child(3) {
+    animation-delay: 4s;
+}
+
+.step:nth-child(4) {
+    animation-delay: 6s;
+}
+
+@keyframes equationSteps {
+    0%, 20% {
+        opacity: 0;
+    }
+
+    30%, 90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* GEOMETRY ANIMATION */
+
+.geometry-animation {
+    height: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.ruler {
+    width: 220px;
+    height: 30px;
+
+    background: #f4c542;
+    position: absolute;
+    top: 30px;
+
+    color: black;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.shape {
+    width: 0;
+    height: 0;
+
+    border: 4px solid #58d6ff;
+
+    animation: drawShape 6s infinite;
+}
+
+@keyframes drawShape {
+
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    40% {
+        width: 180px;
+        height: 0;
+    }
+
+    70%,100% {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* CROP ANIMATION */
+
+.farm {
+    height: 300px;
+    position: relative;
+
+    background: linear-gradient(#63c8ff 65%, #5c9b3b 65%);
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.seed {
+    position: absolute;
+
+    bottom: 35px;
+    left: 48%;
+
+    width: 15px;
+    height: 15px;
+
+    background: brown;
+    border-radius: 50%;
+
+    animation: growPlant 7s infinite;
+}
+
+.stem {
+    position: absolute;
+
+    width: 10px;
+    background: green;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    animation: stemGrow 7s infinite;
+}
+
+.leaf {
+    position: absolute;
+
+    width: 60px;
+    height: 30px;
+
+    background: green;
+    border-radius: 100% 0;
+
+    bottom: 150px;
+    left: 50%;
+
+    animation: leafGrow 7s infinite;
+}
+
+.leaf.two {
+    transform: rotate(180deg);
+    left: 43%;
+}
+
+@keyframes stemGrow {
+    0%,20% {
+        height: 0;
+    }
+
+    70%,100% {
+        height: 150px;
+    }
+}
+
+@keyframes leafGrow {
+
+    0%,50% {
+        transform: scale(0);
+    }
+
+    80%,100% {
+        transform: scale(1);
+    }
+}
+
+/* EGG AND SPERM */
+
+.bio-animation {
+    height: 300px;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #071a45;
+    border-radius: 15px;
+}
+
+.egg {
+    position: absolute;
+
+    right: 15%;
+    top: 100px;
+
+    width: 90px;
+    height: 90px;
+
+    background: #ffd7b5;
+    border-radius: 50%;
+
+    box-shadow: 0 0 30px #ffcc99;
+}
+
+.sperm {
+    position: absolute;
+
+    left: 5%;
+    top: 130px;
+
+    width: 30px;
+    height: 15px;
+
+    background: white;
+    border-radius: 50%;
+
+    animation: spermMove 5s infinite linear;
+}
+
+.tail {
+    position: absolute;
+
+    width: 60px;
+    height: 3px;
+
+    background: white;
+
+    left: -50px;
+    top: 6px;
+
+    transform-origin: right;
+
+    animation: tailMove .3s infinite alternate;
+}
+
+@keyframes spermMove {
+    0% {
+        left: 5%;
+    }
+
+    80% {
+        left: 65%;
+    }
+
+    100% {
+        left: 65%;
+    }
+}
+
+@keyframes tailMove {
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(20deg);
+    }
+}
+
+/* CHAT */
+
+.chat-section {
+    width: 90%;
+    max-width: 700px;
+    margin: 70px auto;
+}
+
+.chat-box {
+    background: rgba(0,0,40,.6);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+#messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    background: rgba(255,255,255,.15);
+    padding: 10px;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+}
+
+.chat-input button {
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #58d6ff;
+    cursor: pointer;
+}
+
+/* VIDEO CHAT */
+
+.video-section {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+video {
+    width: 100%;
+    max-width: 500px;
+
+    border-radius: 20px;
+    background: black;
+}
+
+.video-btn {
+    margin: 15px;
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #58d6ff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
+
+    background: rgba(0,0,40,.7);
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+<div class="logo">
+ESSEN<span>TIALS</span>
+</div>
+
+<nav>
+<button onclick="showSubjects()">Subjects</button>
+<button onclick="scrollToChat()">Comments</button>
+<button onclick="scrollToVideo()">Video Chat</button>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<h1>Learn. Watch. Understand.</h1>
+
+<p>
+ESSENTIALS makes learning Mathematics and Science more visual,
+interactive and enjoyable.
+</p>
+
+<button class="start-btn" onclick="showSubjects()">
+Start Learning
+</button>
+
+</section>
+
+
+<section class="subjects" id="subjects">
+
+<h2 class="section-title">Choose Your Subject</h2>
+
+<div class="subject-container">
+
+<div class="subject-card" onclick="openTopics('math')">
+
+<div class="subject-icon">➗</div>
+
+<h2>Mathematics</h2>
+
+<p>
+Learn through equations, examples and animated constructions.
+</p>
+
+</div>
+
+
+<div class="subject-card" onclick="openTopics('science')">
+
+<div class="subject-icon">🔬</div>
+
+<h2>Science</h2>
+
+<p>
+Explore life, plants, reproduction and the world around us.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- MATHEMATICS TOPICS -->
+
+<section class="topic-area">
+
+<div class="topics" id="math">
+
+<h2 class="section-title">Mathematics Topics</h2>
+
+<div class="topic-grid">
+
+<button class="topic-btn" onclick="openLesson('sets')">
+Sets
+</button>
+
+<button class="topic-btn" onclick="openLesson('numbers')">
+Numbers
+</button>
+
+<button class="topic-btn" onclick="openLesson('algebra')">
+Algebra
+</button>
+
+<button class="topic-btn" onclick="openLesson('geometry')">
+Geometry
+</button>
+
+<button class="topic-btn" onclick="openLesson('fractions')">
+Fractions
+</button>
+
+<button class="topic-btn" onclick="openLesson('statistics')">
+Statistics
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- SCIENCE TOPICS -->
+
+<div class="topics" id="science">
+
+<h2 class="section-title">Science Topics</h2>
+
+<div class="topic-grid">
+
+<button class="topic-btn" onclick="openLesson('plants')">
+Plants
+</button>
+
+<button class="topic-btn" onclick="openLesson('reproduction')">
+Reproduction
+</button>
+
+<button class="topic-btn" onclick="openLesson('animals')">
+Animals
+</button>
+
+<button class="topic-btn" onclick="openLesson('matter')">
+Matter
+</button>
+
+<button class="topic-btn" onclick="openLesson('energy')">
+Energy
+</button>
+
+<button class="topic-btn" onclick="openLesson('humanbody')">
+Human Body
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ALGEBRA -->
+
+<div class="lesson" id="algebra">
+
+<h2>Algebra: Finding an Unknown</h2>
+
+<div class="example">
+
+<h3>Example: Find x</h3>
+
+<div class="equation">
+
+<div class="step">x + 5 = 12</div>
+
+<div class="step">Subtract 5 from both sides</div>
+
+<div class="step">x = 12 − 5</div>
+
+<div class="step">x = 7 ✓</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- GEOMETRY -->
+
+<div class="lesson" id="geometry">
+
+<h2>Geometry: Constructing a Square</h2>
+
+<p>
+First measure the required dimensions, then draw the sides carefully.
+</p>
+
+<div class="geometry-animation">
+
+<div class="ruler">
+Measure: 5 cm
+</div>
+
+<div class="shape"></div>
+
+</div>
+
+<div class="example">
+
+<h3>Steps</h3>
+
+<p>1. Measure the required length.</p>
+<p>2. Mark the points.</p>
+<p>3. Use a ruler to draw straight lines.</p>
+<p>4. Complete the shape.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- SETS -->
+
+<div class="lesson" id="sets">
+
+<h2>Sets</h2>
+
+<div class="example">
+
+<p><b>Example:</b></p>
+
+<p>
+A = {1, 2, 3, 4}
+</p>
+
+<p>
+B = {3, 4, 5, 6}
+</p>
+
+<p>
+A ∩ B = {3, 4}
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- PLANTS -->
+
+<div class="lesson" id="plants">
+
+<h2>Science: How a Crop Grows</h2>
+
+<div class="farm">
+
+<div class="seed"></div>
+
+<div class="stem"></div>
+
+<div class="leaf"></div>
+
+<div class="leaf two"></div>
+
+</div>
+
+<div class="example">
+
+<h3>Stages of Growth</h3>
+
+<p>
+Seed → Germination → Seedling → Growing Plant → Mature Plant
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- REPRODUCTION -->
+
+<div class="lesson" id="reproduction">
+
+<h2>Science: Fertilisation</h2>
+
+<div class="bio-animation">
+
+<div class="egg"></div>
+
+<div class="sperm">
+
+<div class="tail"></div>
+
+</div>
+
+</div>
+
+<div class="example">
+
+<p>
+Fertilisation occurs when a sperm cell successfully joins an egg cell,
+combining genetic material to begin the development of a new organism.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- OTHER SIMPLE LESSONS -->
+
+<div class="lesson" id="numbers">
+
+<h2>Numbers</h2>
+
+<div class="example">
+<p>Example: 25 + 17 = 42</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="fractions">
+
+<h2>Fractions</h2>
+
+<div class="example">
+<p>Example: 1/2 + 1/4 = 3/4</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="statistics">
+
+<h2>Statistics</h2>
+
+<div class="example">
+<p>Example: Find the average of 2, 4, 6.</p>
+<p>(2 + 4 + 6) ÷ 3 = 4</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="animals">
+
+<h2>Animals</h2>
+
+<div class="example">
+<p>Animals can be grouped into vertebrates and invertebrates.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="matter">
+
+<h2>Matter</h2>
+
+<div class="example">
+<p>The three common states of matter are solid, liquid and gas.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="energy">
+
+<h2>Energy</h2>
+
+<div class="example">
+<p>Energy allows things to move, grow, produce heat and perform work.</p>
+</div>
+
+</div>
+
+
+<div class="lesson" id="humanbody">
+
+<h2>Human Body</h2>
+
+<div class="example">
+<p>The human body contains different systems working together.</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- COMMENTS -->
+
+<section class="chat-section" id="chat">
+
+<h2 class="section-title">💬 Comments & Discussion</h2>
+
+<div class="chat-box">
+
+<div id="messages">
+
+<div class="message">
+Welcome to the ESSENTIALS discussion area!
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+id="messageInput"
+placeholder="Leave a comment..."
+>
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- VIDEO CHAT -->
+
+<section class="video-section" id="videoChat">
+
+<h2 class="section-title">📹 Video Chat</h2>
+
+<p>
+Connect with other learners and discuss your lessons.
+</p>
+
+<br>
+
+<video id="localVideo" autoplay muted></video>
+
+<br>
+
+<button class="video-btn" onclick="startCamera()">
+Start Camera
+</button>
+
+<button class="video-btn" onclick="stopCamera()">
+Stop Camera
+</button>
+
+</section>
+
+
+
+<footer>
+
+<h3>ESSENTIALS</h3>
+
+<p>
+Making learning visual, interactive and easier to understand.
+</p>
+
+</footer>
+
+
+
+<script>
+
+function showSubjects() {
+
+document
+.getElementById("subjects")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function openTopics(subject) {
+
+document
+.querySelectorAll(".topics")
+.forEach(function(topic) {
+
+topic.classList.remove("active");
+
+});
+
+
+document
+.getElementById(subject)
+.classList.add("active");
+
+
+document
+.getElementById(subject)
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function openLesson(lesson) {
+
+document
+.querySelectorAll(".lesson")
+.forEach(function(item) {
+
+item.classList.remove("active");
+
+});
+
+
+let selected =
+document.getElementById(lesson);
+
+
+if(selected) {
+
+selected.classList.add("active");
+
+selected.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+}
+
+
+function sendMessage() {
+
+let input =
+document.getElementById("messageInput");
+
+let message =
+input.value.trim();
+
+
+if(message !== "") {
+
+let messageBox =
+document.getElementById("messages");
+
+let newMessage =
+document.createElement("div");
+
+newMessage.className =
+"message";
+
+newMessage.textContent =
+message;
+
+messageBox.appendChild(newMessage);
+
+input.value = "";
+
+messageBox.scrollTop =
+messageBox.scrollHeight;
+
+}
+
+}
+
+
+function scrollToChat() {
+
+document
+.getElementById("chat")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+function scrollToVideo() {
+
+document
+.getElementById("videoChat")
+.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+let stream;
+
+
+async function startCamera() {
+
+try {
+
+stream =
+await navigator.mediaDevices.getUserMedia({
+
+video: true,
+audio: true
+
+});
+
+
+document
+.getElementById("localVideo")
+.srcObject = stream;
+
+}
+
+catch(error) {
+
+alert(
+"Camera access was denied or is unavailable."
+);
+
+}
+
+}
+
+
+function stopCamera() {
+
+if(stream) {
+
+stream
+.getTracks()
+.forEach(track => track.stop());
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

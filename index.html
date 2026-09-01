@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESSENTIALS  smart learning</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f6f8fc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #172033;
+      padding-top: 76px;
+    }
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #4a5a72;
+      --blue: #2a4cf0;
+      --violet: #7c3aed;
+      --green: #059669;
+      --orange: #ea580c;
+      --line: #e2e8f0;
+      --shadow: 0 16px 40px rgba(18, 30, 60, 0.08);
+      --radius-xl: 28px;
+      --radius-md: 16px;
+      --transition: 0.25s cubic-bezier(0.2, 0, 0, 1);
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      z-index: 40;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      transition: transform var(--transition);
+    }
+    .brand:hover { transform: scale(1.02); }
+    .brand span { color: var(--blue); }
+    nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+    .nav-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .nav-btn:hover { background: #eef2ff; color: var(--blue); transform: scale(0.96); }
+    .nav-btn.active { background: #eef2ff; color: var(--blue); font-weight: 700; }
+    .nav-speak {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-speak:hover { background: #1d3bc0; transform: scale(0.97); }
+    .nav-speak:active { transform: scale(0.94); }
+    .nav-speak.stop {
+      background: #dc2626;
+    }
+    .nav-speak.stop:hover { background: #b91c1c; }
+    main { max-width: 1280px; margin: 0 auto; padding: 20px 5% 60px; }
+    .hero {
+      background: linear-gradient(145deg, #14275a, #2a4cf0 60%, #6d3cf0);
+      border-radius: var(--radius-xl);
+      padding: 48px 40px;
+      color: white;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--transition);
+    }
+    .hero:hover { box-shadow: 0 24px 56px rgba(18, 30, 60, 0.18); }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 360px; height: 360px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -120px; right: -80px;
+    }
+    .hero * { position: relative; z-index: 2; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      padding: 6px 18px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin: 20px 0 14px;
+      max-width: 800px;
+    }
+    .hero h1 span {
+      display: inline-block;
+      animation: floatWord 3s infinite alternate ease-in-out;
+    }
+    @keyframes floatWord {
+      0% { transform: translateY(0px) rotate(-0.5deg); }
+      100% { transform: translateY(-6px) rotate(0.5deg); }
+    }
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 620px;
+      color: #e6edff;
+      margin-bottom: 24px;
+    }
+    .btn {
+      border: none;
+      border-radius: 60px;
+      padding: 12px 26px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-light { background: white; color: #234bd2; }
+    .btn-light:hover { background: #f0f4ff; transform: scale(0.96); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-left: 8px;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.2); transform: scale(0.96); }
+    .section { margin-top: 44px; }
+    .section h2 { font-size: 2rem; font-weight: 700; }
+    .muted { color: var(--muted); line-height: 1.6; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 20px;
+      margin-top: 22px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      transition: transform 0.25s, box-shadow 0.3s, border-color 0.2s;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: var(--shadow);
+      border-color: #b9c9ff;
+    }
+    .icon {
+      font-size: 2.2rem;
+      width: 60px; height: 60px;
+      display: grid;
+      place-items: center;
+      background: #eef2ff;
+      border-radius: 18px;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .card:hover .icon { transform: scale(1.08) rotate(2deg); background: #d9e2ff; }
+    .icon-gif {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.04));
+    }
+    .card h3 { margin: 18px 0 6px; font-size: 1.3rem; }
+    .go { color: var(--blue); font-weight: 600; font-size: 0.9rem; transition: transform 0.2s; display: inline-block; }
+    .card:hover .go { transform: translateX(6px); }
+    .back-btn {
+      border: none;
+      background: #eef2ff;
+      color: var(--blue);
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .back-btn:hover { background: #d9e2ff; transform: scale(0.96); }
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 4px;
+    }
+    .reader {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+    .crumb { color: var(--blue); font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+    .reader h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin: 8px 0 12px; }
+    .reader h2 { margin-top: 32px; scroll-margin-top: 90px; font-size: 1.8rem; }
+    .reader h3 { margin-top: 24px; scroll-margin-top: 90px; font-size: 1.4rem; }
+    .reader p, .reader li { font-size: 1.05rem; line-height: 1.7; }
+    .reader li { margin-bottom: 6px; }
+    .callout {
+      background: #eff4ff;
+      border-left: 6px solid var(--blue);
+      padding: 18px 22px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+    .formula {
+      background: #f8f4ea;
+      padding: 16px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      margin: 18px 0;
+    }
+    
+    .pdf-video-container {
+      margin: 28px 0 16px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fafcff;
+      transition: box-shadow 0.3s;
+    }
+    .pdf-video-container:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+    
+    .pdf-embed {
+      width: 100%;
+      height: 600px;
+      border: none;
+      display: block;
+      background: white;
+    }
+    
+    #pdfContainer:fullscreen {
+      background: white;
+      padding: 20px;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+    }
+    #pdfContainer:fullscreen .pdf-embed {
+      flex-grow: 1;
+      height: 100%;
+      width: 100%;
+    }
+
+    .video-embed {
+      width: 100%;
+      height: 340px;
+      border: none;
+      display: block;
+      background: #0b0f1a;
+    }
+    .media-label {
+      padding: 10px 18px;
+      background: #f2f5fd;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .speak-embed-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-left: auto;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .speak-embed-btn:hover { background: #1d3bc0; transform: scale(0.96); }
+
+    @media (max-width: 750px) {
+      header { padding: 0 4%; height: auto; flex-wrap: wrap; gap: 6px; }
+      .brand { font-size: 20px; }
+      .nav-btn { padding: 6px 12px; font-size: 0.85rem; }
+      .hero { padding: 28px 20px; }
+      .reader-layout { grid-template-columns: 1fr; }
+      .btn-ghost { margin-left: 0; margin-top: 8px; }
+      nav { gap: 2px; }
+      .nav-speak { font-size: 0.8rem; padding: 4px 12px; }
+      .pdf-embed { height: 400px; }
+      .video-embed { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">ESSEN<span>TIAL</span>S</div>
+  <nav>
+    <button class="nav-btn active" onclick="home()">Home</button>
+    <button class="nav-btn" onclick="subjects('Science')">Science</button>
+    <button class="nav-btn" onclick="subjects('Mathematics')">Mathematics</button>
+    <button class="nav-btn" onclick="subjects('Questions')">Questions</button>
+    <button class="nav-speak" id="navSpeakBtn">🔊 Read aloud</button>
+    <button class="nav-speak stop" id="navStopBtn">⏹ Stop</button>
+  </nav>
+</header>
+<main id="app"></main>
+<script>
+  // ---------- DATA ----------
+  const D = {
+    Questions: {
+      "Revision": {
+        "Scie": `<h1>Fiction</h1><p>Stories from imagination. Worlds of wonder.</p>`,
+        "Math": `<h1>Non-Fiction</h1><p>Real events and facts. True stories.</p>`
+      }
+    },
+    Mathematics: {
+      "Numeracy": {
+        "Whole Numbers": `<h1>Whole Numbers</h1><p>0, 1, 2, 3...</p><h2 id="ops">Operations</h2><ul><li>Addition</li><li>Subtraction</li></ul><h2 id="ex">Examples</h2><div class="formula">25 + 17 = 42</div>`,
+        "Fractions": `<h1>Fractions</h1><p>Part of a whole.</p><h2 id="types">
+        Types</h2><ul><li>Proper</li><li>Improper</li></ul><h2 id="ex">
+        Example</h2><div class="formula">1/2 + 1/4 = 3/4</div>`,
+        "Decimals": ``
+      },
+      "Algebra": {
+        "Algebra": `<h1>ALGEBRA</h1><h2 id="sub">Substitution</h2><div class="formula">if a = 5, b = 4, c = 0 find a+b+c</div><p>a+b+c = 5+4+0 = 9</p><h2 id="collect">Collecting like terms</h2><div class="formula">3x + 5x = 8x</div>`
+      }
+    },
+    Science: {
+      "Science In Human Activities And occupations": {
+        "Keeping poultry and bees": `<h1>Poultry & Bees</h1><p>Rearing domestic birds and beekeeping.</p><h2 id="examples">Examples</h2><div class="formula">Chicken, Ducks, Turkeys, Honeybees</div><h2 id="products">Products</h2><div class="formula">Eggs, Meat, Feathers, Honey, Wax</div>`,
+        "Crop Growing": `<h1>Crop Growing</h1><p>Agriculture and farming.</p>`,
+        "Keeping sheep": `<h1>Keeping Sheep</h1><p>Rearing sheep for meat, wool, and milk.</p>
+
+        <h3>TERMS USED IN SHEEP REARING</h3>
+        <div class="formula">
+          <strong>Ram:</strong> This is a mature male sheep.<br>
+          <strong>Ewe:</strong> This is a mature female sheep.<br>
+          <strong>Lamb:</strong> This is the young of a sheep.<br>
+          <strong>Lambing:</strong> This is the act of giving birth in sheep.<br>
+          <strong>Mutton:</strong> This is the meat of sheep.<br>
+          <strong>Shearing:</strong> This is the removal of wool from a sheep.<br>
+          <strong>Docking:</strong> This is the cutting of the lamb's tail short.<br>
+          <strong>Gestation period:</strong> This is the period between conception and birth.
+        </div>
+
+        <h3>REASONS FOR DOCKING (Importance of docking sheep)</h3>
+        <div class="formula">
+          • It makes mating easy<br>
+          • It promotes hygiene of a sheep (reduces the risk of fly strike)
+        </div>
+
+        <h3>REASONS FOR REARING SHEEP (Why do farmers keep sheep?)</h3>
+        <div class="formula">
+          • For meat (mutton) production<br>
+          • For wool production<br>
+          • For income after sale
+        </div>
+
+        <h3>IMPORTANCE OF KEEPING SHEEP</h3>
+        <div class="formula">
+          • It is a source of meat (mutton)<br>
+          • It provides wool (fleece)<br>
+          • It provides skins to make leather products<br>
+          • Its droppings are used as farm yard manure<br>
+          • Its horns and hooves are used to make buttons and glue<br>
+          • It is used as sacrifice on cultural ceremonies
+        </div>
+
+        <h3>Products from goats and sheep</h3>
+        <div class="formula">
+          • Mutton (meat)<br>
+          • Wool (fleece)<br>
+          • Skins<br>
+          • Sheep droppings<br>
+          • Horns and hooves
+        </div>
+
+        <h3>EXTERNAL PARTS OF A SHEEP</h3>
+        <div class="formula">
+          External parts of a sheep include: head, neck, back, tail, udder, teats, hooves, horns, ears, eyes, nose, mouth, wool, etc.
+        </div>
+
+        <h3>GROUPS OF SHEEP KEPT IN UGANDA</h3>
+
+        <h3>LOCAL (INDIGENOUS/NATIVE) BREEDS OF SHEEP</h3>
+        <div class="formula">
+          All local breeds of sheep are kept for mutton production<br>
+          • Black-headed Persian<br>
+          • Somali sheep<br>
+          • Red Maasai<br>
+          • Dorper
+        </div>
+
+        <h3>EXOTIC BREEDS OF SHEEP</h3>
+        <div class="formula">
+          • Suffolk<br>
+          • Dorset<br>
+          • Southdown<br>
+          • Cheviot<br>
+          • Texel<br>
+          • Hampshire<br>
+          • Merino<br>
+          • Rambouillet<br>
+          • Bluefaced Leicester<br>
+          • Romney marsh
+        </div>
+
+        <h3>Exotic breeds of sheep kept for meat (mutton) production / mutton breeds of sheep</h3>
+        <div class="formula">
+          • Suffolk<br>
+          • Dorset<br>
+          • Southdown<br>
+          • Cheviot<br>
+          • Texel<br>
+          • Hampshire
+        </div>
+
+        <h3>Exotic breeds of sheep kept for wool (fleece) production / wool breeds of sheep</h3>
+        <div class="formula">
+          • Merino<br>
+          • Rambouillet<br>
+          • Bluefaced Leicester<br>
+          • Romney sheep
+        </div>
+
+        <h3>Exotic breeds of sheep kept for both mutton and wool production / dual purpose breeds of sheep</h3>
+        <div class="formula">
+          • Corriedale sheep<br>
+          • Romney sheep (previously called Romney marsh sheep)
+        </div>
+
+        <h3>BREEDING IN SHEEP</h3>
+        <div class="formula">
+          • A ewe should be served at the age of 16 - 18 months<br>
+          • The gestation period of sheep is 5 months (150 days).
+        </div>
+
+        <h3>FLUSHING</h3>
+        <div class="formula">
+          This is the providing of extra nutritious feeds to a ewe before mating
+        </div>
+
+        <h3>IMPORTANCE OF FLUSHING</h3>
+        <div class="formula">
+          • It stimulates ovulation (increases the rate of ovulation)<br>
+          • It increases the chances of multiple births
+        </div>
+
+        <h3>STEAMING UP</h3>
+        <div class="formula">
+          This is the practice of feeding a pregnant animal on food rich in proteins
+        </div>
+
+        <h3>IMPORTANCE OF STEAMING UP</h3>
+        <div class="formula">
+          • It lengthens the next lactation period<br>
+          • It increases colostrum<br>
+          • It prevents low birth weight<br>
+          • It enables the foetus to grow well<br>
+          • It enables the pregnant animal to get strength for giving birth
+        </div>
+
+        <h3>WEANING</h3>
+        <div class="formula">
+          This is the gradual introduction of other foods to a baby to supplement breast milk<br>
+          Weaning in sheep is done between 3 – 4 weeks.
+        </div>
+
+        <h3>SHEARING</h3>
+        <div class="formula">
+          This is the removal of wool (fleece) from a sheep<br>
+          It is done using electric shears or hand shears<br>
+          Electric shears remove wool faster than hand shears<br>
+          Weaning sheep should be sheared at 8 months<br>
+          A mature sheep should be sheared once a year
+        </div>
+
+        <h3>Why is shearing done in summer season?</h3>
+        <div class="formula">
+          There is enough sunshine to keep the sheep warm
+        </div>
+
+        <h3>Why is shearing not done in winter season?</h3>
+        <div class="formula">
+          To prevent death of sheep due to coldness
+        </div>
+
+        <h3>FACTORS CONSIDERED WHEN CHOOSING A GOOD SHEEP (EWE/RAM)</h3>
+        <div class="formula">
+          • It should be humble/docile/calm<br>
+          • It should have well developed udder and teats<br>
+          • It should be healthy (free from diseases)<br>
+          • Its mother should have a multiple birth
+        </div>
+
+        <h3>PARASITES (PESTS) IN FARM ANIMALS</h3>
+        <div class="formula">
+          A parasite is an organism that depends on a host for food and shelter<br>
+          A host is an organism on which a parasite depends for food.
+        </div>
+
+        <h3>How do parasites benefit from their host for survival?</h3>
+        <div class="formula">
+          • They get food<br>
+          • They get shelter
+        </div>
+
+        <h3>GROUPS (TYPES OR CLASSES) OF PARASITES</h3>
+        <div class="formula">
+          1. External Parasites (ectoparasites)<br>
+          2. Internal Parasites (endoparasites)
+        </div>
+
+        <h3>EXTERNAL PARASITES</h3>
+        <div class="formula">
+          These are parasites that live outside the body of host
+        </div>
+
+        <h3>Examples of ectoparasites (external Parasites)</h3>
+        <div class="formula">
+          • Ticks<br>
+          • Tsetse flies<br>
+          • Mites
+        </div>
+
+        <h3>CONTROL OF ECTOPARASITES</h3>
+        <div class="formula">
+          • Spraying with acaricides<br>
+          • By dusting with acaricides<br>
+          • Dipping in acaricides<br>
+          • By paddock grazing<br>
+          • By deticking<br>
+          • Clearing bushes around livestock farms (to control tsetse flies)<br>
+          • Use tsetse fly traps to control tsetse flies
+        </div>
+
+        <h3>INTERNAL PARASITES</h3>
+        <div class="formula">
+          These are parasites that live inside the body of the host.<br>
+          They live in muscles, intestines and liver
+        </div>
+
+        <h3>Examples of endoparasites (internal Parasites)</h3>
+        <div class="formula">
+          • Tape worms<br>
+          • Hook worms<br>
+          • Thread worms<br>
+          • Liver flukes<br>
+          • Ascaris worm
+        </div>
+
+        <h3>Control of endoparasites</h3>
+        <div class="formula">
+          • By deworming<br>
+          • Giving animals clean feeds<br>
+          • Regular cleaning of the houses for animals<br>
+          • Regular cleaning of the feeding equipment for animals<br>
+          • Grazing in well drained areas (to control liver flukes)
+        </div>
+
+        <h3>EFFECTS OF PARASITES (PESTS) OF CATTLE</h3>
+        <div class="formula">
+          • Some parasites suck blood which leads to anaemia<br>
+          • Some parasites spread diseases to animals<br>
+          • Some parasites damage the skins of animals<br>
+          • Some parasites cause discomfort to animals
+        </div>
+
+        <h3>DISEASES OF GOATS AND SHEEP</h3>
+        <div class="formula">
+          • Foot rot<br>
+          • Heart water<br>
+          • Red water<br>
+          • Pneumonia<br>
+          • Coccidiosis<br>
+          • Anthrax<br>
+          • Nairobi diseases<br>
+          • Nangana<br>
+          • Mastitis<br>
+          • Lamb dysentery<br>
+          • East coast fever<br>
+          • Rift valley disease<br>
+          • Foot and mouth disease<br>
+          • Blue tongue disease
+        </div>`,
+        "Keeping goats": `<h1>Keeping Goats</h1><p>Rearing goats for milk, meat, and mohair.</p>
+
+        <h3>COMMON TERMS USED IN KEEPING GOATS</h3>
+        <div class="formula">
+          <strong>A nanny goat (doe):</strong> This is an adult female goat<br>
+          <strong>A Billy goat (buck):</strong> This is an adult male goat<br>
+          <strong>Wether:</strong> This is a castrated billy goat<br>
+          <strong>Kid:</strong> This is a young goat<br>
+          <strong>Kidding:</strong> This is the act of giving birth to kids (act of giving birth in goats)<br>
+          <strong>Browsing:</strong> This is the act of feeding on leaves and soft shoots of plants<br>
+          <strong>Weaning:</strong> This is the gradual introduction of other foods to a baby to supplement breast milk<br>
+          <strong>Gestation period:</strong> This is the time taken from conception to birth<br>
+          <strong>Lactation:</strong> This is production of milk by the mother's mammary glands after birth
+        </div>
+
+        <h3>REASONS FOR GOAT KEEPING (WHY FARMERS KEEP GOATS AND SHEEP?)</h3>
+        <div class="formula">
+          • For milk production<br>
+          • For meat production<br>
+          • For income after sale<br>
+          • For mohair production
+        </div>
+
+        <h3>IMPORTANCE (USES) OF GOATS TO PEOPLE</h3>
+        <div class="formula">
+          • They provide milk<br>
+          • They provide meat<br>
+          • They are sold for money<br>
+          • Angora goats provide mohair<br>
+          • They are used as dowry<br>
+          • They are used as sacrifices<br>
+          • Their droppings and urine are used as farm yard manure<br>
+          • Their skins are used to make leather products and dance costumes
+        </div>
+
+        <h4>Examples of leather (products made from animal skins)</h4>
+        <div class="formula">
+          • Leather shoes<br>
+          • Leather bags<br>
+          • Leather belts<br>
+          • Leather jackets
+        </div>
+
+        <h3>EXTERNAL PARTS OF A GOAT</h3>
+        <div class="formula">
+          External parts of a goat include: head, neck, back, tail, udder, teats, hooves, horns, ears, eyes, nose, mouth, etc.
+        </div>
+
+        <h3>TYPES OF GOATS</h3>
+        <div class="formula">
+          A type of goats is a group of goats kept for a specific purpose<br>
+          • Dairy breeds (milk goats)<br>
+          • Meat goats<br>
+          • Mohair goats
+        </div>
+
+        <h3>BREEDS OF GOATS</h3>
+        <div class="formula">
+          A breed of goats is a group (family) of goats with the similar characteristics (features)<br>
+          • Local breeds (indigenous/native breeds)<br>
+          • Exotic breeds<br>
+          • Cross breeds
+        </div>
+
+        <h3>LOCAL BREEDS</h3>
+        <div class="formula">
+          These are breeds of goats that have been in Uganda for a long time<br>
+          Local breeds of goats are mainly kept for meat
+        </div>
+
+        <h3>Characteristics of local breeds of goats</h3>
+        <div class="formula">
+          • They are small in size<br>
+          • They are resistant to diseases<br>
+          • They are resistant to bad weather<br>
+          • They mature slowly<br>
+          • They need less care and attention<br>
+          • They have good quality products<br>
+          • They produce less products
+        </div>
+
+        <h3>EXAMPLES OF LOCAL BREEDS OF GOATS</h3>
+        <div class="formula">
+          • Mubende goats<br>
+          • Small East African<br>
+          • Kigezi goats<br>
+          • Sebei goats<br>
+          • Karamoja goats
+        </div>
+
+        <h3>Advantages of local breeds</h3>
+        <div class="formula">
+          • They are resistant to diseases<br>
+          • They are resistant to bad weather<br>
+          • They need less care and attention<br>
+          • They produce less milk and meat<br>
+          • They have good quality products
+        </div>
+
+        <h3>Disadvantages of local breeds</h3>
+        <div class="formula">
+          • They mature slowly<br>
+          • They produce less milk and meat<br>
+          • They have hard meat
+        </div>
+
+        <h3>EXOTIC BREEDS OF GOATS</h3>
+        <div class="formula">
+          These are breeds of goats that were imported from other countries
+        </div>
+
+        <h3>Characteristics of exotic breeds of goats</h3>
+        <div class="formula">
+          • They are big in size<br>
+          • They are vulnerable to diseases<br>
+          • They are vulnerable to bad weather<br>
+          • They need much care and attention<br>
+          • They mature quickly<br>
+          • They produce a lot of meat and milk
+        </div>
+
+        <h3>Examples of exotic breeds of goat Reason for keeping them</h3>
+
+        <h4>For meat production</h4>
+        <div class="formula">
+          • Boer goats<br>
+          • Savanna goats<br>
+          • Kalahari Red goats<br>
+          • Somali goats (Galla goats)<br>
+          • Galla goats (Somali goats)<br>
+          • Kiko goats
+        </div>
+
+        <h4>For milk production</h4>
+        <div class="formula">
+          • Saanen goats<br>
+          • Toggenburg goats<br>
+          • Alpine goats<br>
+          • Anglo-Nubian goats<br>
+          • Golden Guernsey goats
+        </div>
+
+        <h4>For mohair production</h4>
+        <div class="formula">
+          • Angora goats
+        </div>
+
+        <h3>Advantages of exotic breeds of goats</h3>
+        <div class="formula">
+          • They mature quickly<br>
+          • They produce a lot of meat and milk<br>
+          • They have soft meat
+        </div>
+
+        <h3>Disadvantages of exotic breeds of goats</h3>
+        <div class="formula">
+          • They are not resistant to diseases<br>
+          • They are not resistant to bad weather<br>
+          • They need much care and attention
+        </div>
+
+        <h3>BREEDING IN GOATS</h3>
+        <div class="formula">
+          A Nanny goat is mated for the first time at the age of 14 – 18 months.<br>
+          How often do goats breed in a year? Goats breed once in a year.
+        </div>
+
+        <h3>GESTATION PERIOD OF A GOAT</h3>
+        <div class="formula">
+          Gestation period is the time taken from conception to birth<br>
+          The gestation period of a nanny goat is 5 months (150 days)
+        </div>
+
+        <h3>HEAT PERIOD IN GOATS</h3>
+        <div class="formula">
+          This is the time when the nanny goat is ready to mate with a billy goat
+        </div>
+
+        <h3>Signs of a nanny goat on heat</h3>
+        <div class="formula">
+          • It becomes restless<br>
+          • It mounts other goats<br>
+          • It stands still when mounted<br>
+          • It urinates frequently<br>
+          • It makes a lot of noise<br>
+          • Loss of appetite<br>
+          • The vulva swells and turns red<br>
+          • Mucus discharge from the vulva
+        </div>
+
+        <h3>CARING FOR A PREGNANT GOAT</h3>
+        <div class="formula">
+          • Providing concentrates one month before kidding. Concentrate feeds are rich in carbohydrates and proteins.<br>
+          • Providing them with mineral licks. Mineral licks are rich in mineral salts<br>
+          • Providing a separate clean dry shelter to pregnant goats
+        </div>
+
+        <h3>WEANING IN GOATS</h3>
+        <div class="formula">
+          Weaning should be done at least 3 - 4 months after kidding.
+        </div>
+
+        <h3>SIGNS OF A GOOD MILK BREED OF GOAT</h3>
+        <div class="formula">
+          • It has a large udder and teats.<br>
+          • It has large milk veins which appear below the belly.<br>
+          • It has strong and well placed hind legs.<br>
+          • It has strong back muscles.
+        </div>
+
+        <h3>MANAGEMENT (ROUTINE) PRACTICES IN GOAT KEEPING (Ways of caring for farm animals)</h3>
+        <div class="formula">
+          • Numbering<br>
+          • Dehorning/Disbudding<br>
+          • Hoof trimming<br>
+          • Castration<br>
+          • Deworming<br>
+          • Spraying<br>
+          • Dipping<br>
+          • Dusting<br>
+          • Culling<br>
+          • Feeding<br>
+          • Housing
+        </div>
+
+        <h3>NUMBERING (IDENTIFICATION OF ANIMALS)</h3>
+        <div class="formula">
+          This is the putting of a mark or label on the body of animals.
+        </div>
+
+        <h3>Importance of numbering (livestock identification)</h3>
+        <div class="formula">
+          • It helps a farmer to easily find his lost animals<br>
+          • It helps a farmer to keep proper farm records
+        </div>
+
+        <h3>HOOF TRIMMING</h3>
+        <div class="formula">
+          This is cutting of overgrown hooves from the animal<br>
+          • It reduces the risk of foot rot disease
+        </div>
+
+        <h3>DEHORNING/DISBUDDING</h3>
+        <div class="formula">
+          Dehorning is the removal of horn buds from the animal<br>
+          Disbudding is the removal of horn buds from the animal<br>
+          • It increases space in the barn/byre
+        </div>
+
+        <h3>CASTRATION</h3>
+        <div class="formula">
+          This is the removal or inactivation of testicles of a male animal
+        </div>
+
+        <h3>METHODS OF CASTRATION</h3>
+        <div class="formula">
+          1. Open castration<br>
+          2. Closed castration<br>
+          3. Loop castration (band castration)
+        </div>
+
+        <h3>1. OPEN CASTRATION (SURGICAL CASTRATION)</h3>
+        <div class="formula">
+          This is when the scrotum is cut to remove the testicles
+        </div>
+
+        <h3>Instruments used in open castration</h3>
+        <div class="formula">
+          • Sharp knife<br>
+          • Razorblade<br>
+          • Scalpel
+        </div>
+
+        <h3>2. CLOSED CASTRATION</h3>
+        <div class="formula">
+          This is the use of burdizzo to crush the sperm ducts and blood vessels
+        </div>
+
+        <h3>Instrument used in closed castration</h3>
+        <div class="formula">
+          • Burdizzo
+        </div>
+
+        <h3>How is a burdizzo useful on cattle farm?</h3>
+        <div class="formula">
+          It is used in closed castration
+        </div>
+
+        <h3>How is a burdizzo adapted to its function?</h3>
+        <div class="formula">
+          It has blunt pincers
+        </div>
+
+        <h3>3. LOOP CASTRATION (BAND CASTRATION)</h3>
+        <div class="formula">
+          This is the use of a rubber band to squeeze and break the sperm ducts and blood vessel
+        </div>
+
+        <h3>Instruments used in loop castration</h3>
+        <div class="formula">
+          • Rubber band<br>
+          • Elastrator
+        </div>
+
+        <h3>An elastrator is used to apply rubber band around the scrotum during band castration</h3>
+
+        <h3>Why is loop castration impossible in pigs (boars)?</h3>
+        <div class="formula">
+          They don't have sagging testicles
+        </div>
+
+        <h3>ADVANTAGES OF CASTRATION</h3>
+        <div class="formula">
+          • It prevents inbreeding<br>
+          • It prevents random mating<br>
+          • It makes the animal humble (docile)<br>
+          • It makes the animal grow big and fat<br>
+          • It reduces bad smell in male animals<br>
+          • It prevents unwanted pregnancies
+        </div>
+
+        <h3>DISADVANTAGES OF CASTRATION</h3>
+        <div class="formula">
+          • It is painful<br>
+          • It increases the risk of infections<br>
+          • It needs a skilled person<br>
+          • It denies the male animal its right of reproduction
+        </div>
+
+        <h3>DEWORMING</h3>
+        <div class="formula">
+          This is the giving of medicine through the mouth to kill worms (endoparasites) in animals
+        </div>
+
+        <h3>Why farmers deworm their animals? (Importance of deworming)</h3>
+        <div class="formula">
+          • To kill endoparasites (worms)
+        </div>
+
+        <h3>METHODS OF DEWORMING</h3>
+        <div class="formula">
+          1. Drenching<br>
+          2. Dosing
+        </div>
+
+        <h3>1. DOSING</h3>
+        <div class="formula">
+          This is the giving of solid medicine through the mouth to kill worms in animals
+        </div>
+
+        <h3>2. DRENCHING</h3>
+        <div class="formula">
+          This is the giving of liquid medicine through the mouth to kill worms in animals.
+        </div>
+
+        <h3>Farm tools used for drenching</h3>
+        <div class="formula">
+          • Drenching gun<br>
+          • Syringe<br>
+          • Bottle
+        </div>
+
+        <h3>State the importance of spraying, dipping and dusting livestock with acaricides</h3>
+        <div class="formula">
+          • To kill ticks and mites<br>
+          • To prevent tick-borne diseases
+        </div>
+
+        <h3>How is a knapsack sprayer important on a goat farm?</h3>
+        <div class="formula">
+          It is used for spraying acaricides
+        </div>
+
+        <h3>HOUSING GOATS</h3>
+        <div class="formula">
+          This is the act of constructing a house for goats
+        </div>
+
+        <h3>QUALITIES OF A GOOD HOUSE FOR GOATS</h3>
+        <div class="formula">
+          • It should be well ventilated<br>
+          • It should have a strong roof<br>
+          • It should have a slanting floor<br>
+          • It should be clean and dry
+        </div>
+
+        <h3>IMPORTANCE OF A HOUSE TO GOATS</h3>
+        <div class="formula">
+          • To protect goats from bad weather<br>
+          • To protect goats from predators<br>
+          • To protect goats from thieves
+        </div>
+
+        <h3>DANGERS OF SHARING A HOUSE WITH DOMESTIC ANIMALS</h3>
+        <div class="formula">
+          • It leads to bad smell in the house<br>
+          • It leads to parasites in the house<br>
+          • It leads to competition for oxygen<br>
+          • It leads to easy spread of diseases to people<br>
+          • It leads to destruction of household property
+        </div>
+
+        <h3>SYSTEMS (METHODS) OF GRAZING GOATS</h3>
+        <div class="formula">
+          • Free range grazing or Herding<br>
+          • Tethering<br>
+          • Paddock grazing<br>
+          • Zero grazing<br>
+          • Strip grazing
+        </div>
+
+        <h3>Mention three methods of rotational grazing</h3>
+        <div class="formula">
+          • Tethering<br>
+          • Paddock grazing<br>
+          • Strip grazing
+        </div>
+
+        <h3>HERDING</h3>
+        <div class="formula">
+          This is when a herdsman looks after animals as they graze<br>
+          It is also called free range grazing because animals move on their own looking for food
+        </div>
+
+        <h3>Advantages of herding</h3>
+        <div class="formula">
+          • Animals get a balanced diet<br>
+          • Animals make enough body exercise<br>
+          • Less attention is needed<br>
+          • It is cheap to manage
+        </div>
+
+        <h3>Disadvantages of herding</h3>
+        <div class="formula">
+          • It leads to easy spread of diseases<br>
+          • Animals can destroy crops<br>
+          • Animals can get lost<br>
+          • It needs a big piece of land<br>
+          • It can lead to overgrazing
+        </div>
+
+        <h3>PADDOCK GRAZING</h3>
+        <div class="formula">
+          This is the method of grazing in which a pastureland divided into small fenced plots<br>
+          Paddocks are small fenced plots on pastureland
+        </div>
+
+        <h3>Advantages of paddock grazing</h3>
+        <div class="formula">
+          • It allows proper use of pasture<br>
+          • It gives pasture time to grow<br>
+          • It controls over grazing<br>
+          • It controls tickborne diseases<br>
+          • Manure is evenly distributed on the farm
+        </div>
+
+        <h3>How does paddock grazing control ectoparasites and diseases in livestock?</h3>
+        <div class="formula">
+          It starves ticks to death (it breaks the feeding cycle of ticks)
+        </div>
+
+        <h3>DISADVANTAGES OF PADDOCK GRAZING</h3>
+        <div class="formula">
+          • It is expensive to manage<br>
+          • It needs a big piece of land<br>
+          • Animals do not make enough body exercises
+        </div>
+
+        <h3>STRIP GRAZING</h3>
+        <div class="formula">
+          This is the grazing of animals on a pastureland divided into strips using electric wires.
+        </div>
+
+        <h3>Advantages of strip grazing</h3>
+        <div class="formula">
+          • There is proper use of pasture.<br>
+          • It controls diseases and parasites<br>
+          • It prevents over grazing<br>
+          • Animals do not destroy crops
+        </div>
+
+        <h3>Disadvantages of strip grazing</h3>
+        <div class="formula">
+          • It is expensive to maintain<br>
+          • Few animals are kept<br>
+          • Animals do not make enough body exercises<br>
+          • It can only be used in areas with electricity
+        </div>
+
+        <h3>TETHERING</h3>
+        <div class="formula">
+          This is the method of grazing where a farmer ties the animal on a peg or tree using a rope<br>
+          The animals tethered is moved to a new place when necessary
+        </div>
+
+        <h3>Advantages of tethering</h3>
+        <div class="formula">
+          • There is no need for fencing<br>
+          • It is easy to start<br>
+          • It is cheap to manage<br>
+          • It needs a small piece of land<br>
+          • Animals may not destroy crops<br>
+          • The farmer gets time to do other work
+        </div>
+
+        <h3>Disadvantages of tethering</h3>
+        <div class="formula">
+          • Animals do not get balanced diet<br>
+          • Few animals are kept<br>
+          • Animals can easily be stolen<br>
+          • Animals can easily be killed by predators<br>
+          • The rope can easily strangle the animal<br>
+          • Animals do not make enough body exercises
+        </div>
+
+        <h3>ZERO GRAZING</h3>
+        <div class="formula">
+          This is the keeping of animals in stalls where water and food are provided.<br>
+          It is also be called stall grazing
+        </div>
+
+        <h3>Advantages of zero grazing</h3>
+        <div class="formula">
+          • Many animals are kept in a small area<br>
+          • It prevents wastage of feeds<br>
+          • It needs a small piece of land<br>
+          • It protects animals from bad weather<br>
+          • It is easy to collect manure<br>
+          • It is easy to cull sick animals<br>
+          • Animals produce a lot of milk<br>
+          • It controls the spread of diseases and parasites
+        </div>
+
+        <h3>Why do animals produce a lot of milk under zero grazing?</h3>
+        <div class="formula">
+          There is no wastage of energy
+        </div>
+
+        <h3>Disadvantages of zero grazing</h3>
+        <div class="formula">
+          • It is expensive to manage<br>
+          • Animals lack body exercises<br>
+          • It needs a lot of labour
+        </div>`,
+        "Keeping pigs": `<h1>Keeping Pigs</h1><p>Rearing pigs for meat (pork), bacon, and lard.</p>
+
+        <h3>PIG KEEPING</h3>
+        <div class="formula">
+          This is the rearing of domestic pigs
+        </div>
+
+        <h3>TERMS IN RELATION TO PIG KEEPING</h3>
+        <div class="formula">
+          <strong>Piggery:</strong> is the place where domestic pigs are kept.<br>
+          <strong>Boar:</strong> is male pig.<br>
+          <strong>Sow:</strong> is an adult female pig.<br>
+          <strong>Barrow (hog):</strong> castrated male pig<br>
+          <strong>Herd:</strong> a group of pigs<br>
+          <strong>Gilt:</strong> is a young female pig<br>
+          <strong>Farrowing:</strong> is the act of giving birth in pigs.<br>
+          <strong>Pork:</strong> is the meat from pigs.<br>
+          <strong>Lard:</strong> fats from pigs.<br>
+          <strong>Sty:</strong> house for pigs.<br>
+          <strong>Litter:</strong> A group of piglets produced by the sow at one time<br>
+          <strong>Piglet:</strong> is a young pig.<br>
+          <strong>Runt:</strong> is smallest and weakest piglet in a litter
+        </div>
+
+        <h3>NOTE</h3>
+        <div class="formula">
+          The gestation period of a pig (sow) is 3 months, 3 weeks and 3 days
+        </div>
+
+        <h3>EXTERNAL PARTS OF A PIG</h3>
+        <div class="formula">
+          External parts of a pig include: head, neck, back, tail, udder, teats, hooves, ears, eyes, nose, mouth, etc.
+        </div>
+
+        <h3>TYPES OF BREEDS OF PIGS</h3>
+        <div class="formula">
+          • Local breeds<br>
+          • Exotic breeds<br>
+          • Wild pigs (warthog)
+        </div>
+
+        <h3>Examples of local breeds of pigs</h3>
+        <div class="formula">
+          • Black pigs<br>
+          • Old spotted pigs
+        </div>
+
+        <h3>Exotics breeds of pigs</h3>
+        <div class="formula">
+          • Landrace<br>
+          • Large white (Yorkshire)<br>
+          • Hampshire<br>
+          • Duroc<br>
+          • Middle white<br>
+          • Poland China<br>
+          • Wessex saddle back<br>
+          • Tamworth<br>
+          • Camborough
+        </div>
+
+        <h3>Factors considered when selecting a good pig for rearing</h3>
+        <div class="formula">
+          • Heredity: it should be from a good ancestral family.<br>
+          • It should be free from sickness.<br>
+          • The piglet should have 12 teats.
+        </div>
+
+        <h3>SYSTEMS OF KEEPING PIGS</h3>
+        <div class="formula">
+          • Intensive system<br>
+          • Extensive system
+        </div>
+
+        <h3>CHARACTERISTICS OF A GOOD PIGSTY</h3>
+        <div class="formula">
+          • It should have a slanting floor<br>
+          &nbsp;&nbsp;For easy cleaning<br>
+          &nbsp;&nbsp;For easy drainage of waste<br>
+          • It should be well ventilated<br>
+          &nbsp;&nbsp;To allow free air circulation<br>
+          • It should be cleaned dry<br>
+          &nbsp;&nbsp;To prevent the risks of pneumonia<br>
+          • It should have farrowing pens<br>
+          • It should not be slippery<br>
+          • It should be leak proof<br>
+          • It should have guard rails<br>
+          &nbsp;&nbsp;To prevent the mother from crushing the piglets.
+        </div>
+
+        <h3>TYPES OF FEEDS IN PIGS</h3>
+        <div class="formula">
+          1. The creep food<br>
+          2. Sow and weaner meal<br>
+          3. The fattener (finisher) meal.
+        </div>
+
+        <h3>1. The creep food</h3>
+        <div class="formula">
+          For piglets between 1 day to 8 weeks
+        </div>
+
+        <h3>2. Sow and weaner meal</h3>
+        <div class="formula">
+          For weaning piglets<br>
+          It is introduced to piglets at 8 weeks up to 50kgs
+        </div>
+
+        <h3>3. The fattener (finisher) meal</h3>
+        <div class="formula">
+          For pig ready for sale<br>
+          It helps to fatten the pigs
+        </div>
+
+        <h3>NOTE</h3>
+        <div class="formula">
+          Piglets are given red soil to provide iron.
+        </div>
+
+        <h3>TEETH-CLIPPING</h3>
+        <div class="formula">
+          This is the cutting of pointed teeth of piglets<br>
+          It should be done in the first day after birth.<br>
+          It can be done when the piglet is 15 minutes old<br>
+          It is done using tooth clippers or forceps
+        </div>
+
+        <h3>REASON FOR TEETH CLIPPING (IMPORTANCE OF TEETH CLIPPING)</h3>
+        <div class="formula">
+          • To prevent injuries to the udder and teats of the sow<br>
+          • To prevent injuries to the other piglets (littermates)
+        </div>
+
+        <h3>Why should the sow be restrained (tied or put in a separate pen/pig sty) during tooth clipping?</h3>
+        <div class="formula">
+          To prevent injuries as the sow tries to protect its young
+        </div>
+
+        <h3>DISADVANTAGE OF TEETH CLIPPING</h3>
+        <div class="formula">
+          • It can cause damage to the gums<br>
+          • It can lead to infections
+        </div>
+
+        <h3>COLOSTRUM</h3>
+        <div class="formula">
+          This is the first milk got from a mother animal after giving birth
+        </div>
+
+        <h3>IMPORTANCE OF COLOSTRUM</h3>
+        <div class="formula">
+          • It opens up the digestive system of a baby<br>
+          • It boosts immunity of the baby (it contains a lot of antibodies)<br>
+          • It is easy to digest<br>
+          • It has a lot of nutrients (it provides a balanced diet to a baby)<br>
+          • It provides energy to the piglet to activate its own heat production
+        </div>
+
+        <h3>DISEASES IN PIGS</h3>
+
+        <h4>Viral diseases</h4>
+        <div class="formula">
+          Swine fever<br>
+          i) African swine fever<br>
+          ii) Classical swine fever (hog cholera)<br>
+          Swine flu (swine influenza)
+        </div>
+
+        <h4>Bacterial diseases</h4>
+        <div class="formula">
+          Swine dysentery<br>
+          Pneumonia<br>
+          Mastitis<br>
+          Greasy pig disease<br>
+          Foot rot<br>
+          Anthrax
+        </div>
+
+        <h4>Protozoan disease</h4>
+        <div class="formula">
+          Coccidiosis<br>
+          Nagana (trypanosomiasis)
+        </div>
+
+        <h4>Malnutritional disease</h4>
+        <div class="formula">
+          Piglet anaemia
+        </div>
+
+        <h3>EXAMPLES OF ECTOPARASITES (EXTERNAL PARASITES) IN PIGS</h3>
+        <div class="formula">
+          • Jiggers<br>
+          • Mange<br>
+          • Lice<br>
+          • Fleas<br>
+          • Ticks<br>
+          • Mites
+        </div>
+
+        <h3>EXAMPLES OF ENDOPARASITES (INTERNAL PARASITES) IN PIGS</h3>
+        <div class="formula">
+          • Tape worms<br>
+          • Hook worms<br>
+          • Thread worms<br>
+          • Liver flukes<br>
+          • Ascaris worm<br>
+          • Lungworm
+        </div>
+
+        <h3>WAYS OF CONTROLLING ANIMAL DISEASES</h3>
+        <div class="formula">
+          • Regular vaccination<br>
+          • By culling<br>
+          • By paddock grazing<br>
+          • Isolate and treat sick animals<br>
+          • Applying quarantine<br>
+          • Proper feeding<br>
+          • Use a strip cup to detect mastitis in milk<br>
+          • Regular cleaning of the animal houses<br>
+          • Spraying with acaricides to control tickborne diseases<br>
+          • Use artificial insemination to avoid mating infection
+        </div>
+
+        <h3>RECORD KEEPING</h3>
+        <div class="formula">
+          This is the writing of information about different activities done on a farm
+        </div>
+
+        <h3>FARM RECORDS</h3>
+        <div class="formula">
+          These are written information about different activities done on a farm.
+        </div>
+
+        <h3>TYPES (EXAMPLES) OF FARM RECORDS</h3>
+        <div class="formula">
+          • Production records<br>
+          • Health records<br>
+          • Labour records<br>
+          • Sales and expenses records<br>
+          • Inventory records<br>
+          • Feeding records<br>
+          • Breeding records
+        </div>
+
+        <h3>REASONS FOR KEEPING FARM RECORDS (IMPORTANCE OF RECORD KEEPING)</h3>
+        <div class="formula">
+          • It enables a farmer to know the profits or losses<br>
+          • It enables a farmer to be taxed fairly<br>
+          • It enables a farmer to get loans easily<br>
+          • It enables a farmer to know the farm history<br>
+          • It enables a farmer to plan for the farm<br>
+          • It enables a farmer to make proper decisions
+        </div>
+
+        <h3>FACTORS TO CONSIDER BEFORE STARTING A LIVESTOCK FARM</h3>
+        <div class="formula">
+          • Land<br>
+          • Capital<br>
+          • Labour<br>
+          • Market<br>
+          • Management
+        </div>`
+      },
+      "Human Health": {
+        "Primary Health Care": `<h1>Primary Health Care</h1><p>Essential health care for all.</p><h2 id="principles">Principles</h2><div class="formula">• Everyone must benefit<br>• Everyone participates</div><h2 id="elements">Elements</h2><div class="formula">Immunization, Family planning, Water and sanitation</div>`
+      }
+    }
+  };
+
+  const app = document.getElementById('app');
+
+  function setActive(label) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.textContent === label));
+  }
+
+  // Speech synthesis control
+  let currentUtterance = null;
+  let isSpeaking = false;
+
+  function readSelectedOrContent() {
+    // Stop any ongoing speech
+    stopReading();
+
+    const sel = window.getSelection();
+    let text = sel.toString().trim();
+    if (text.length === 0) {
+      const notesEl = document.getElementById('notes');
+      if (notesEl) text = notesEl.innerText.trim();
+      if (text.length === 0) text = document.body.innerText.trim();
+    }
+    if (text.length === 0) { alert('No text found to read.'); return; }
+
+    currentUtterance = new SpeechSynthesisUtterance(text);
+    currentUtterance.lang = 'en-US';
+    currentUtterance.rate = 1.0;
+    currentUtterance.pitch = 1.0;
+    
+    currentUtterance.onstart = function() {
+      isSpeaking = true;
+      document.getElementById('navSpeakBtn').textContent = '🔊 Reading...';
+      document.getElementById('navSpeakBtn').style.opacity = '0.7';
+    };
+    
+    currentUtterance.onend = function() {
+      isSpeaking = false;
+      document.getElementById('navSpeakBtn').textContent = '🔊 Read aloud';
+      document.getElementById('navSpeakBtn').style.opacity = '1';
+      currentUtterance = null;
+    };
+    
+    currentUtterance.onerror = function() {
+      isSpeaking = false;
+      document.getElementById('navSpeakBtn').textContent = '🔊 Read aloud';
+      document.getElementById('navSpeakBtn').style.opacity = '1';
+      currentUtterance = null;
+    };
+
+    speechSynthesis.speak(currentUtterance);
+  }
+
+  function stopReading() {
+    speechSynthesis.cancel();
+    isSpeaking = false;
+    currentUtterance = null;
+    document.getElementById('navSpeakBtn').textContent = '🔊 Read aloud';
+    document.getElementById('navSpeakBtn').style.opacity = '1';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('navSpeakBtn').addEventListener('click', function() {
+      if (isSpeaking) {
+        stopReading();
+      } else {
+        readSelectedOrContent();
+      }
+    });
+    document.getElementById('navStopBtn').addEventListener('click', stopReading);
+  });
+
+  function animatedIcon(emoji) {
+    return `<span class="icon-gif" style="display:flex; gap:2px; animation: pulseGlow 1.8s infinite alternate;">${emoji}</span>`;
+  }
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes pulseGlow {
+      0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(42,76,240,0.1)); }
+      100% { transform: scale(1.08); filter: drop-shadow(0 0 12px rgba(42,76,240,0.25)); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  function home() {
+    setActive('Home');
+    app.innerHTML = `
+      <section class="hero">
+        <span class="badge">📘 LEARN · PRACTICE · UNDERSTAND</span>
+        <h1><span>Your subjects,</span> <span style="animation-delay:0.3s;">Properly organized.</span></h1>
+        <p>ESSENTIALS gives you clear themes, useful topics, and complete notes. come explore the beauty of Mathematics and Science.</p>
+        <p>
+          <button class="btn btn-light" onclick="subjects('Science')"><span style="display:inline-block;animation:pulseGlow 2s infinite alternate;">🔬</span> Explore Science</button>
+          <button class="btn btn-ghost" onclick="subjects('Mathematics')"><span style="display:inline-block;animation:pulseGlow 2s infinite alternate 0.2s;">📐</span> Explore Mathematics</button>
+          <button class="btn btn-ghost" onclick="subjects('Questions')"><span style="display:inline-block;animation:pulseGlow 2s infinite alternate 0.4s;">📖</span> Explore Questions</button>
+        </p>
+      </section>
+      <section class="section">
+        <h2>Subjects</h2>
+        <p class="muted">Choose a subject and start from its themes and topics.</p>
+        <div class="grid">
+          <article class="card" onclick="subjects('Science')">
+            <div class="icon">${animatedIcon('🔬')}</div>
+            <h3>Science</h3>
+            <p class="muted">Human health and well-organized science notes.</p>
+            <span class="go">Open Science →</span>
+          </article>
+          <article class="card" onclick="subjects('Questions')">
+            <div class="icon">${animatedIcon('📖')}</div>
+            <h3>Questions</h3>
+            <p class="muted">Reading, comprehension and language.</p>
+            <span class="go">Open Questions →</span>
+          </article>
+          <article class="card" onclick="subjects('Mathematics')">
+            <div class="icon">${animatedIcon('📐')}</div>
+            <h3>Mathematics</h3>
+            <p class="muted">Numbers, algebra, geometry and measurement.</p>
+            <span class="go">Open Mathematics →</span>
+          </article>
+        </div>
+      </section>
+    `;
+    window.scrollTo(0,0);
+  }
+
+  function subjects(s) {
+    setActive(s);
+    const themes = Object.keys(D[s]);
+    const iconMap = {
+      'Science': { 'Science In Human Activities And occupations': '🧑‍🌾', 'Matter and Energy': '⚡', 'Managing changes in the environment': '🌍', 'Human Health': '❤️', 'the Environment': '🌿', 'Megadassssy': '📚' },
+      'Mathematics': { 'Numeracy': '🔢', 'Algebra': '✖️', 'Measurement': '📏', 'Sets': '⊂', 'Interpretation of Graphs and Data': '📊' },
+      'Questions': { 'Reading & Comprehension': '📖' }
+    };
+    const getIcon = (t) => (iconMap[s] && iconMap[s][t]) || '📘';
+    app.innerHTML = `
+      <button class="back-btn" onclick="home()">← Home</button>
+      <section class="section">
+        <h2>${s}</h2>
+        <p class="muted">Choose a theme to see its topics.</p>
+        <div class="grid">
+          ${themes.map((t) => `
+            <article class="card" onclick="theme('${s}','${t}')">
+              <div class="icon">${animatedIcon(getIcon(t))}</div>
+              <h3>${t}</h3>
+              <p class="muted">${Object.keys(D[s][t]).length} topic(s)</p>
+              <span class="go">View topics →</span>
+            </article>
+          `).join('')}
+        </div>
+      </section>
+    `;
+    window.scrollTo(0,0);
+  }
+
+  function theme(s, t) {
+    const topics = Object.keys(D[s][t]);
+    const topicIcons = {
+      'Science': { 'Keeping poultry and bees': '🐓', 'Crop Growing': '🌾', 'Keeping sheep': '🐑', 'Keeping goats': '🐐', 'Keeping pigs': '🐖', 'Algebraic Expressions': '🧮', 'Linear Equations': '➗', 'Primary Health Care': '🏥', 'Perimeter and Area': '📏', 'Units of Measurement': '📐', 'Megadassssy': '📚' },
+      'Mathematics': { 'Whole Numbers': '🔢', 'Fractions': '½', 'Decimals': '🔟', 'Ratios and proportion': '➗', 'Percentages': '%', 'Integers': '🔢', 'Finite/ Modular System': '🔄', 'Algebra': '✖️', 'Money': '💰', 'Distance speed and Time': '⏱️', 'Length, Mass and Capacity': '📏', 'Volume And Surface Area': '📦', 'set concepts': '⊂', 'Data Handling': '📊' },
+      'Questions': { 'Fiction': '📖', 'Non-Fiction': '📰' }
+    };
+    const getIcon = (x) => (topicIcons[s] && topicIcons[s][x]) || '📌';
+    app.innerHTML = `
+      <button class="back-btn" onclick="subjects('${s}')">← ${s}</button>
+      <section class="section">
+        <p class="muted">${s} / ${t}</p>
+        <h2>${t}</h2>
+        <p class="muted">Click any topic to open complete notes.</p>
+        <div class="grid">
+          ${topics.map(x => `
+            <article class="card" onclick="topic('${s}','${t}','${x}')">
+              <div class="icon">${animatedIcon(getIcon(x))}</div>
+              <h3>${x}</h3>
+              <p class="muted">Clear notes, explanations and examples.</p>
+              <span class="go">Read notes →</span>
+            </article>
+          `).join('')}
+        </div>
+      </section>
+    `;
+    window.scrollTo(0,0);
+  }
+
+  function topic(s, t, x) {
+    const note = D[s][t][x];
+    const safeName = x.replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/\s+/g, '_');
+    const pdfSrc = `${safeName}.pdf`;
+    const videoSrc = `${safeName}.mp4`;
+
+    const pdfUrl = `${pdfSrc}#toolbar=0&navpanes=0&scrollbar=0`;
+
+    app.innerHTML = `
+      <button class="back-btn" onclick="theme('${s}','${t}')">← Back to topics</button>
+      <div class="reader-layout">
+        <article class="reader">
+          <div class="crumb">${s} › ${t} › ${x}</div>
+          
+          <div id="notes">${note}</div>
+
+          <div class="pdf-video-container" id="pdfContainer">
+            <div class="media-label">
+              <span>📄 Essentials</span>
+              <button class="speak-embed-btn" onclick="toggleFullscreen('pdfContainer')">⛶ Fullscreen</button>
+            </div>
+            <embed src="${pdfUrl}" type="application/pdf" class="pdf-embed" style="overflow:hidden;" />
+          </div>
+
+          <div class="pdf-video-container">
+            <div class="media-label">🎬 Video</div>
+            <video controls class="video-embed" style="width:100%; height:340px; background:#0b0f1a;">
+              <source src="${videoSrc}" type="video/mp4">
+              <source src="${videoSrc.replace('.mp4', '.webm')}" type="video/webm">
+              <source src="${videoSrc.replace('.mp4', '.ogg')}" type="video/ogg">
+              <source src="${videoSrc.replace('.mp4', '.avi')}" type="video/avi">
+              <source src="${videoSrc.replace('.mp4', '.mov')}" type="video/mov">
+              <source src="${videoSrc.replace('.mp4', '.mkv')}" type="video/mkv">
+              <source src="${videoSrc.replace('.mp4', '.flv')}" type="video/flv">
+              <source src="${videoSrc.replace('.mp4', '.wmv')}" type="video/wmv">
+              <source src="${videoSrc.replace('.mp4', '.m4v')}" type="video/m4v">
+              Your browser does not support video.
+            </video>
+          </div>
+        </article>
+      </div>
+    `;
+    window.scrollTo(0,0);
+  }
+
+  function toggleFullscreen(elementId) {
+    const elem = document.getElementById(elementId);
+    
+    if (!document.fullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  home();
+</script>
+</body>
+</html>
